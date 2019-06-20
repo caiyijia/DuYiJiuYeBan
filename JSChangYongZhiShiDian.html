@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript常用知识点</title>
+
+    <style>
+        body {
+            height: 3000px;
+        }
+
+        div {
+            position: absolute;
+            top: 1500px;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <div class="demo"></div>
+    <ul id="wrapper"></ul>
+
+    <script type="text/javascript">
+        var oF = document.createDocumentFragment();
+        var oUl = document.getElementById('wrapper');
+        var htmlStr = '';
+
+        for(var i = 0; i < 10; i++) {
+            // var newLi = document.createElement('li');
+            // newLi.innerText = i;
+            // oF.appendChild(newLi);
+            htmlStr += '<li>' + i + '</li>';
+        }
+        oUl.innerHTML = htmlStr;
+        // oUl.appendChild(oF);
+
+        // 虚拟DOM
+
+
+
+        // 属性，特性  
+        // type value id class 特性  有映射关系
+        // data 等自定义 属性 无映射关系
+        // 特性包含于属性
+
+        // var oDiv = document.getElementsByClassName("demo")[0];
+        // var oImg = new Image();
+        // oImg.onload = function () {
+
+        // }
+        // oImg.src = 'https://gss0.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/a71ea8d3fd1f4134ad4d4a81251f95cad0c85ed2.jpg';
+        // oDiv.appendChild(oImg);
+
+        //监控滑轮事件
+        // 不断判断当前div位置
+        // 采取预加载
+        // 把图片正式添加在页面中
+        
+
+        
+
+
+    </script>
+
+</body>
+
+</html>
