@@ -61,3 +61,28 @@ function startMove(dom, velocity, target) {
         }
     }, 30);
 }
+
+// 任意元素的某一属性值发生运动
+function startMove(dom, attr, target) {
+    clearInterval(dom.timer);
+    var iSpeed = null,
+        iCur = null;
+    dom.timer = setInterval(function () {
+        if (attr === 'opacity') {
+            iCur = parseFloat(getStyle(dom, attr)) * 100;
+        } else {
+            iCur = parseInt(getStyle(dom, attr));
+        }
+        iSpeed = (target - iCur) / 7;
+        iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+        if (iCur == target) {
+            clearInterval(dom.timer);
+        } else {
+            if (attr == 'opacity') {
+                dom.style.opacity = (iCur + iSpeed) / 100;
+            }else {
+                dom.style[attr] = iCur + iSpeed + 'px';
+            }
+        }
+    }, 30)
+}
