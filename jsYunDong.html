@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS运动</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: orange;
+            position: absolute;
+            left: 500px;
+            top: 0px;
+        }
+
+        #btn {
+            margin-top: 150px;
+        }
+
+        span {
+            position: absolute;
+            top: 0;
+            left: 300px;
+            width: 1px;
+            height: 100px;
+            background: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+    </div>
+    <span></span>
+    <button id="btn">Run</button>
+    <script type="text/javascript">
+        var oDiv = document.getElementsByTagName('div')[0];
+        var oBtn = document.getElementById('btn');
+        var timer;
+        oBtn.onclick = function () {
+            startMove(oDiv, -7, 300);
+        }
+
+        //匀速运动
+        function startMove(dom, velocity, target) {
+            clearInterval(timer);
+            var remain = target % velocity;
+            timer = setInterval(function () {
+                if (Math.abs(target - dom.offsetLeft) <= remain) {
+                    clearInterval(timer);
+                    dom.style.left = target + 'px';
+                } else {
+                    dom.style.left = dom.offsetLeft + velocity + 'px';
+                }
+            }, 30);
+        }
+    </script>
+</body>
+
+</html>
