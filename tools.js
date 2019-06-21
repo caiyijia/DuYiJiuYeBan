@@ -86,3 +86,12 @@ function startMove(dom, attr, target) {
         }
     }, 30)
 }
+
+// 获取属性值
+function getStyle(dom, attr) {
+    if (window.getComputedStyle) {
+        return window.getComputedStyle(dom, null)[attr];
+    } else {
+        return dom.currentStyle[attr];
+    }
+}
