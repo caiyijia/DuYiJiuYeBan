@@ -48,11 +48,20 @@
         } */
 
         div {
+            position: absolute;
             height: 100px;
             width: 100px;
             opacity: 1;
             background: #f40;
-            margin-bottom: 100px;
+            left: 0;
+        }
+
+        #topDiv {
+            top: 200px;
+        }
+
+        #bottomDiv {
+            top: 400px;
         }
     </style>
 </head>
@@ -62,23 +71,45 @@
         <span></span>
     </div> -->
 
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    <div id="topDiv"></div>
+    <div id="bottomDiv"></div>
+
     <!-- <button id="btn">Run</button> -->
     <script type="text/javascript">
-        var timer = null;
-        var oDivArray = document.getElementsByTagName('div');
+        var oTopDiv = document.getElementById('topDiv');
+        var oBottomDiv = document.getElementById('bottomDiv');
+        oTopDiv.onclick = function () {
+            multiMove(this, {
+                width: 400,
+                height: 400,
+                left: 200,
+                top: 300,
+                opacity: 50,
+            }, function () {
+                multiMove(oBottomDiv, {
+                    width: 400,
+                    height: 400,
+                    left: 200,
+                    top: 300,
+                    opacity: 50,
+                }, function () {
+                    alert('Over');
+                })
 
-        for (var i = 0; i < oDivArray.length; i++) {
-            oDivArray[i].onmouseenter = function () {
-                startMove(this, 'width', 400);
-            }
-            oDivArray[i].onmouseleave = function () {
-                startMove(this, 'height', 400)
-            }
+            })
         }
+
+        // var timer = null;
+        // var oDivArray = document.getElementsByTagName('div');
+
+        // for (var i = 0; i < oDivArray.length; i++) {
+        //     oDivArray[i].onmouseenter = function () {
+        //         startMove(this, 'width', 400);
+        //     }
+        //     oDivArray[i].onmouseleave = function () {
+        //         startMove(this, 'height', 400)
+        //     }
+        // }
 
         function getStyle(dom, attr) {
             if (window.getComputedStyle) {
@@ -87,30 +118,63 @@
                 return dom.currentStyle[attr];
             }
         }
-        // 任意元素的某一属性值发生运动
-        function startMove(dom, attr, target) {
+
+        //任意元素的多个属性值同时发生变化
+        function multiMove(dom, attrObj, callback) {
             clearInterval(dom.timer);
             var iSpeed = null,
                 iCur = null;
             dom.timer = setInterval(function () {
-                if (attr === 'opacity') {
-                    iCur = parseFloat(getStyle(dom, attr)) * 100;
-                } else {
-                    iCur = parseInt(getStyle(dom, attr));
-                }
-                iSpeed = (target - iCur) / 7;
-                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
-                if (iCur == target) {
-                    clearInterval(dom.timer);
-                } else {
+                var bStop = true;
+                for (var attr in attrObj) {
+                    if (attr == 'opacity') {
+                        iCur = parseFloat(getStyle(dom, attr)) * 100;
+                    } else {
+                        iCur = parseInt(getStyle(dom, attr));
+                    }
+                    iSpeed = (attrObj[attr] - iCur) / 7;
+                    iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
                     if (attr == 'opacity') {
                         dom.style.opacity = (iCur + iSpeed) / 100;
-                    }else {
+                    } else {
                         dom.style[attr] = iCur + iSpeed + 'px';
                     }
+                    if (iCur != attrObj[attr]) {
+                        bStop = false;
+                    }
+                }
+                if (bStop) {
+                    clearInterval(dom.timer);
+                    typeof callback == 'function' && callback();
                 }
             }, 30)
         }
+
+
+        // // 任意元素的某一属性值发生运动
+        // function startMove(dom, attr, target) {
+        //     clearInterval(dom.timer);
+        //     var iSpeed = null,
+        //         iCur = null;
+        //     dom.timer = setInterval(function () {
+        //         if (attr === 'opacity') {
+        //             iCur = parseFloat(getStyle(dom, attr)) * 100;
+        //         } else {
+        //             iCur = parseInt(getStyle(dom, attr));
+        //         }
+        //         iSpeed = (target - iCur) / 7;
+        //         iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+        //         if (iCur == target) {
+        //             clearInterval(dom.timer);
+        //         } else {
+        //             if (attr == 'opacity') {
+        //                 dom.style.opacity = (iCur + iSpeed) / 100;
+        //             }else {
+        //                 dom.style[attr] = iCur + iSpeed + 'px';
+        //             }
+        //         }
+        //     }, 30)
+        // }
 
 
         // var oDiv = document.getElementsByClassName('wrapper')[0];
