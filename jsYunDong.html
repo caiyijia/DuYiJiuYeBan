@@ -12,7 +12,7 @@
             height: 100px;
             background: orange;
             position: absolute;
-            left: 500px;
+            left: 600px;
             top: 0px;
         }
 
@@ -42,22 +42,39 @@
         var oBtn = document.getElementById('btn');
         var timer;
         oBtn.onclick = function () {
-            startMove(oDiv, -7, 300);
+            accMove(oDiv, 8, 300);
         }
 
-        //匀速运动
-        function startMove(dom, velocity, target) {
+        //加（减）速运动
+        function accMove(dom, acc, target) {
             clearInterval(timer);
-            var remain = target % velocity;
+            var velocity = null;
             timer = setInterval(function () {
-                if (Math.abs(target - dom.offsetLeft) <= remain) {
+                velocity = (target - dom.offsetLeft) / acc;
+                
+                velocity = velocity > 0 ? Math.ceil(velocity) : Math.floor(velocity);
+                console.log(velocity);
+                if (dom.offsetLeft == target) {
                     clearInterval(timer);
-                    dom.style.left = target + 'px';
                 } else {
                     dom.style.left = dom.offsetLeft + velocity + 'px';
                 }
-            }, 30);
+            }, 30)
         }
+
+        // //匀速运动
+        // function startMove(dom, velocity, target) {
+        //     clearInterval(timer);
+        //     var remain = target % velocity;
+        //     timer = setInterval(function () {
+        //         if (Math.abs(target - dom.offsetLeft) <= remain) {
+        //             clearInterval(timer);
+        //             dom.style.left = target + 'px';
+        //         } else {
+        //             dom.style.left = dom.offsetLeft + velocity + 'px';
+        //         }
+        //     }, 30);
+        // }
     </script>
 </body>
 
