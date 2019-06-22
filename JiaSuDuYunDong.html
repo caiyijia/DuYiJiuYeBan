@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>加速度运动</title>
+    <style>
+        div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: #f40;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+
+    <script>
+        var oDiv = document.getElementsByTagName('div')[0];
+        var timer = null;
+        oDiv.onclick = function () {
+            startMove(this, -2);
+        }
+
+        //加速度不变的加减速运动
+        function startMove(dom, a) {
+            clearInterval(timer);
+            var iSpeed = 20;
+            timer = setInterval(function () {
+                iSpeed = iSpeed + a;
+                oDiv.style.left = oDiv.offsetLeft + iSpeed + 'px';
+                console.log(oDiv.style.left);
+            }, 300)
+        }
+    </script>
+</body>
+
+</html>
