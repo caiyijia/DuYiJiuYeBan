@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模拟重力场</title>
+    <style>
+        div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #f40;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+
+    </div>
+
+    <script>
+        var oDiv = document.getElementById('demo');
+        var timer = null;
+
+        oDiv.onclick = function () {
+            startMove(this);
+        }
+
+        function startMove(dom) {
+            clearInterval(dom.timer);
+            var iSpeedX = 6;
+            var iSpeedY = 0;
+            var g = 9.8;
+            var count = 0;
+            dom.timer = setInterval(function () {
+                iSpeedY += g;
+                var newTop = dom.offsetTop + iSpeedY;
+                var newLeft = dom.offsetLeft + iSpeedX;
+                if (newTop >= document.documentElement.clientHeight - dom.clientHeight) {
+                    //防止newTop值超过clientHeight造成的滚动条出现
+                    newTop = document.documentElement.clientHeight - dom.clientHeight;
+                    iSpeedY *= -1;
+                    iSpeedX *= 0.4;
+                    iSpeedY *= 0.8;
+                    count++;
+                }else {
+                    count = 0;
+                }
+
+                if (newTop < 0) {
+                    newTop = 0;
+                    iSpeedY *= -1;
+                    iSpeedX *= 0.4;
+                    iSpeedY *= 0.8;
+                }
+                
+                if (newLeft >= document.documentElement.clientWidth - dom.clientWidth) {
+                    newLeft = document.documentElement.clientWidth - dom.clientWidth;
+                    iSpeedX *= -1;
+                    iSpeedX *= 0.4;
+                    iSpeedY *= 0.8;
+                }
+
+                if (newLeft < 0) {
+                    newLeft = 0;
+                    iSpeedX *= -1;
+                    iSpeedX *= 0.4;
+                    iSpeedY *= 0.8;
+                }
+
+                // if (Math.abs(iSpeedX) <= 1) {
+                //     iSpeedX = 0;
+                    
+                // }
+                // if (Math.abs(iSpeedY) <= 1) {
+                //     iSpeedY = 0;
+                    
+                // }
+                
+                // 如果连续两次反弹的结果都是在边界不变的话，就清楚定时器。
+                if (count == 2) {
+                    clearInterval(dom.timer);
+                    console.log('Over');
+                } else {
+                    dom.style.top = newTop + 'px';
+                    dom.style.left = newLeft + 'px';
+                }
+
+
+                console.log(iSpeedX, iSpeedY, count )
+            }, 30)
+        }
+    </script>
+</body>
+
+</html>
