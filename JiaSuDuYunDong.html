@@ -15,29 +15,70 @@
             height: 100px;
             background: #f40;
         }
+
+        span {
+            position: absolute;
+            left: 300px;
+            top: 0;
+            background: #f90;
+            width: 1px;
+            height: 100px;
+        }
     </style>
 </head>
 
 <body>
     <div></div>
-
+    <span></span>
     <script>
         var oDiv = document.getElementsByTagName('div')[0];
         var timer = null;
+        var bStop = true;
         oDiv.onclick = function () {
-            startMove(this, -2);
+            if (bStop) {
+                startMove(this, 300);
+                bStop = false;
+            } else {
+                clearInterval(timer);
+                this.style.left = 0 + 'px';
+                bStop = true;
+            }
+
         }
 
-        //加速度不变的加减速运动
-        function startMove(dom, a) {
+        function startMove(dom, target) {
             clearInterval(timer);
-            var iSpeed = 20;
+            //加速度方向以右为正
+            var a = 3;
+            var iSpeed = 0;
             timer = setInterval(function () {
-                iSpeed = iSpeed + a;
-                oDiv.style.left = oDiv.offsetLeft + iSpeed + 'px';
-                console.log(oDiv.style.left);
-            }, 300)
+
+                a = (target - dom.offsetLeft) / 7;
+                iSpeed += a;
+                iSpeed *= 0.9;console.log(dom.offsetLeft, iSpeed);
+                // 以速度为标准判断且与目标点的绝对距离
+                if (Math.abs(iSpeed) < 0.5 && Math.abs(target - dom.offsetLeft) <= 1) {
+                    clearInterval(timer);
+                    dom.style.left = target + 'px';
+                    
+                } else {
+                    dom.style.left = dom.offsetLeft + iSpeed + 'px';
+                }
+            }, 30)
         }
+
+
+
+        // //加速度不变的加减速运动
+        // function startMove(dom, a) {
+        //     clearInterval(timer);
+        //     var iSpeed = 20;
+        //     timer = setInterval(function () {
+        //         iSpeed = iSpeed + a;
+        //         oDiv.style.left = oDiv.offsetLeft + iSpeed + 'px';
+        //         console.log(oDiv.style.left);
+        //     }, 300)
+        // }
     </script>
 </body>
 
