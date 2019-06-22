@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>加速度运动</title>
     <style>
-        div {
+        /* div {
             position: absolute;
             left: 0;
             top: 0;
@@ -23,28 +23,77 @@
             background: #f90;
             width: 1px;
             height: 100px;
+        } */
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            position: relative;
+            margin: 100px auto 0px;
+            width: 800px;
+            height: 100px;
+            list-style: none;
+        }
+
+        ul .ele {
+            float: left;
+            width: 198px;
+            border: 1px solid black;
+            background: orange;
+            height: 98px;
+            line-height: 98px;
+            text-align: center;
+        }
+
+        .bg {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 200px;
+            height: 100px;
+            opacity: 0.4;
+            background: deeppink;
         }
     </style>
 </head>
 
 <body>
-    <div></div>
-    <span></span>
+    <ul>
+        <li class="ele">蔡</li>
+        <li class="ele">一</li>
+        <li class="ele">甲</li>
+        <li class="ele">帅</li>
+        <li class="bg"></li>
+    </ul>
+
+    <!-- <div></div>
+    <span></span> -->
     <script>
-        var oDiv = document.getElementsByTagName('div')[0];
+        var eleArray = document.getElementsByClassName('ele');
+        var bg = document.getElementsByClassName('bg')[0];
         var timer = null;
         var bStop = true;
-        oDiv.onclick = function () {
-            if (bStop) {
-                startMove(this, 300);
-                bStop = false;
-            } else {
-                clearInterval(timer);
-                this.style.left = 0 + 'px';
-                bStop = true;
-            }
 
+        for(var i = 0; i < eleArray.length; i++) {
+            eleArray[i].onmouseenter = function () {
+                startMove(bg, this.offsetLeft)
+            }
         }
+
+
+        // oDiv.onclick = function () {
+        //     if (bStop) {
+        //         startMove(this, 300);
+        //         bStop = false;
+        //     } else {
+        //         clearInterval(timer);
+        //         this.style.left = 0 + 'px';
+        //         bStop = true;
+        //     }
+
+        // }
 
         function startMove(dom, target) {
             clearInterval(timer);
@@ -55,7 +104,7 @@
 
                 a = (target - dom.offsetLeft) / 7;
                 iSpeed += a;
-                iSpeed *= 0.9;console.log(dom.offsetLeft, iSpeed);
+                iSpeed *= 0.75;
                 // 以速度为标准判断且与目标点的绝对距离
                 if (Math.abs(iSpeed) < 0.5 && Math.abs(target - dom.offsetLeft) <= 1) {
                     clearInterval(timer);
