@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽实力</title>
+
+    <style>
+        div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #f40;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+
+    </div>
+
+    <script>
+        var oDiv = document.getElementById('demo');
+        var lastX = 0;
+        var lastY = 0;
+        var iSpeedX = 0;
+        var iSpeedY = 0;
+        // var timer;
+
+        oDiv.onmousedown = function (e) {
+            var event = event || e;
+            var disX = event.clientX - this.offsetLeft;
+            var disY = event.clientY - this.offsetTop;
+            var self = this;
+            clearInterval(this.timer);
+            document.onmousemove = function (e) {
+                var event = event || e;
+                var newLeft = event.clientX - disX;
+                var newTop = event.clientY - disY;
+                iSpeedX = newLeft - lastX;
+                iSpeedY = newTop - lastY;
+                lastX = newLeft;
+                lastY = newTop;
+
+                // var oSpan = document.createElement('span');
+                // oSpan.style.position = 'absolute';
+                // oSpan.style.left = newLeft + self.offsetHeight / 2 - 2 + 'px';
+                // oSpan.style.top = newTop + self.offsetWidth / 2 - 2 + 'px';
+                // oSpan.style.height = '4px';
+                // oSpan.style.width = '4px';
+                // oSpan.style.backgroundColor = 'black';
+                // document.body.appendChild(oSpan);
+
+                self.style.left = newLeft + 'px';
+                self.style.top = newTop + 'px';
+            }
+            document.onmouseup = function () {
+                document.onmouseup = null;
+                document.onmousemove = null;
+                startMove(self, iSpeedX, iSpeedY);
+            }
+
+        }
+
+
+        function startMove(dom, iSpeedX, iSpeedY) {
+            clearInterval(dom.timer);
+            // var iSpeedX = 6;
+            // var iSpeedY = 0;
+            var g = 9.8;
+            var count = 0;
+            dom.timer = setInterval(function () {
+                iSpeedY += g;
+                var newTop = dom.offsetTop + iSpeedY;
+                var newLeft = dom.offsetLeft + iSpeedX;
+                if (newTop >= document.documentElement.clientHeight - dom.clientHeight) {
+                    //防止newTop值超过clientHeight造成的滚动条出现
+                    newTop = document.documentElement.clientHeight - dom.clientHeight;
+                    iSpeedY *= -1;
+                    iSpeedX *= 0.8;
+                    iSpeedY *= 0.8;
+                    count++;
+                } else {
+                    count = 0;
+                }
+
+                if (newTop < 0) {
+                    newTop = 0;
+                    iSpeedY *= -1;
+                    iSpeedX *= 0.8;
+                    iSpeedY *= 0.8;
+                }
+
+                if (newLeft >= document.documentElement.clientWidth - dom.clientWidth) {
+                    newLeft = document.documentElement.clientWidth - dom.clientWidth;
+                    iSpeedX *= -1;
+                    iSpeedX *= 0.8;
+                    iSpeedY *= 0.8;
+                }
+
+                if (newLeft < 0) {
+                    newLeft = 0;
+                    iSpeedX *= -1;
+                    iSpeedX *= 0.8;
+                    iSpeedY *= 0.8;
+                }
+
+                // if (Math.abs(iSpeedX) <= 1) {
+                //     iSpeedX = 0;
+
+                // }
+                // if (Math.abs(iSpeedY) <= 1) {
+                //     iSpeedY = 0;
+
+                // }
+
+                // 如果连续两次反弹的结果都是在边界不变的话，就清楚定时器。
+                if (count == 2) {
+                    clearInterval(dom.timer);
+                    console.log('Over');
+                } else {
+                    dom.style.top = newTop + 'px';
+                    dom.style.left = newLeft + 'px';
+                }
+
+
+                console.log(iSpeedX, iSpeedY, count)
+            }, 30)
+        }
+    </script>
+</body>
+
+</html>
