@@ -142,12 +142,13 @@
                     bStop = false;
                     clearTimeout(timer);
                     index = myIndex;
+                    changeIndex(index);
                     startMove(sliderPage, {
                         left: -index * moveWidth
                     }, function () {
                         bStop = true;
                         timer = setTimeout(autoMove, 1500);
-                        changeIndex(index);
+
                     });
                 }
             })(i);
@@ -161,6 +162,7 @@
                 clearTimeout(timer);
                 if (!direction || direction == 'left->right') {
                     index++;
+                    changeIndex(index);
                     startMove(sliderPage, {
                         left: sliderPage.offsetLeft - moveWidth
                     }, function () {
@@ -170,7 +172,7 @@
                         }
                         timer = setTimeout(autoMove, 1500);
                         bStop = true;
-                        changeIndex(index);
+
                     });
                 } else if (direction == 'right->left') {
                     if (sliderPage.offsetLeft == 0) {
@@ -178,12 +180,13 @@
                         index = num;
                     }
                     index--;
+                    changeIndex(index);
                     startMove(sliderPage, {
                         left: sliderPage.offsetLeft + moveWidth
                     }, function () {
                         timer = setTimeout(autoMove, 1500);
                         bStop = true;
-                        changeIndex(index);
+
                     })
                 }
             }
