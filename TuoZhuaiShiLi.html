@@ -42,6 +42,7 @@
                 var event = event || e;
                 var newLeft = event.clientX - disX;
                 var newTop = event.clientY - disY;
+                // 将两次鼠标移动事件的坐标差值作为初速度。
                 iSpeedX = newLeft - lastX;
                 iSpeedY = newTop - lastY;
                 lastX = newLeft;
@@ -62,6 +63,7 @@
             document.onmouseup = function () {
                 document.onmouseup = null;
                 document.onmousemove = null;
+                console.log(iSpeedX, iSpeedY);
                 startMove(self, iSpeedX, iSpeedY);
             }
 
@@ -78,7 +80,7 @@
                 iSpeedY += g;
                 var newTop = dom.offsetTop + iSpeedY;
                 var newLeft = dom.offsetLeft + iSpeedX;
-                if (newTop >= document.documentElement.clientHeight - dom.clientHeight) {
+                if (newTop > document.documentElement.clientHeight - dom.clientHeight) {
                     //防止newTop值超过clientHeight造成的滚动条出现
                     newTop = document.documentElement.clientHeight - dom.clientHeight;
                     iSpeedY *= -1;
@@ -96,7 +98,7 @@
                     iSpeedY *= 0.8;
                 }
 
-                if (newLeft >= document.documentElement.clientWidth - dom.clientWidth) {
+                if (newLeft > document.documentElement.clientWidth - dom.clientWidth) {
                     newLeft = document.documentElement.clientWidth - dom.clientWidth;
                     iSpeedX *= -1;
                     iSpeedX *= 0.8;
@@ -110,17 +112,10 @@
                     iSpeedY *= 0.8;
                 }
 
-                // if (Math.abs(iSpeedX) <= 1) {
-                //     iSpeedX = 0;
-
-                // }
-                // if (Math.abs(iSpeedY) <= 1) {
-                //     iSpeedY = 0;
-
-                // }
-
-                // 如果连续两次反弹的结果都是在边界不变的话，就清楚定时器。
-                if (count == 2) {
+                // 如果连续两次反弹的结果都是在边界不变的话，视为重力方向无速度。
+                // 如果水平方向速率小于等于1的话，视为水平方向无速度。
+                // 如果两者同时发生，视为静止，清除定时器。
+                if (count == 2 && Math.abs(iSpeedX) <= 1) {
                     clearInterval(dom.timer);
                     console.log('Over');
                 } else {
@@ -129,7 +124,7 @@
                 }
 
 
-                console.log(iSpeedX, iSpeedY, count)
+                // console.log(iSpeedX, iSpeedY, count)
             }, 30)
         }
     </script>
