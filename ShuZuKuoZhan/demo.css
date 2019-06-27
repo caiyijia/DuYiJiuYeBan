@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+/* searchWrapper */
+.wrapper {
+    padding: 10px 15px;
+    width: 400px;
+    border: 1px solid #ccc;
+    /* top leftRight bottom*/
+    margin: 100px auto 0px;
+    border-radius: 10px;
+}
+
+.wrapper .sWrapper {
+    margin-bottom: 20px;
+}
+
+.wrapper .sWrapper input{
+    height:30px;
+    width:50%;
+    border-radius:10px;
+    border:1px solid #ccc;
+    margin:0px 5px;
+    padding:5px;
+    outline: none;
+}
+.wrapper .sWrapper .btn {
+    cursor: pointer;
+    color: #3c8dff;
+    padding: 0px 5px;
+    border-radius: 4px;
+}
+
+.wrapper .sWrapper .btn.active{
+    color: #fff;
+    background-color: #3c8dff;
+}
+
+
+/* friendList section style */
+/* .wrapper .flWrapper {
+
+} */
+
+.wrapper .flWrapper ul li {
+    border-bottom: 1px solid #999;
+    position: relative;
+    padding: 10px 0px 10px 52px;
+}
+
+.wrapper .flWrapper ul li img{
+    position: absolute;
+    left: 0px;
+    top: 5px;    
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    /* border: 1px solid black; */
+}
+
+.wrapper .flWrapper ul li .name {
+    margin-bottom: 10px;
+}
+
+.wrapper .flWrapper ul li .des {
+    font-size: 12px;
+    color: #666;
+}
+
+/* .wrapper{
+    width:500px;
+    height:600px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    margin:100px auto;
+    position:relative;
+}
+
+.search {
+    margin: 10px auto;
+    width: 100%;
+    height: 60px;
+    border: 1px solid black;
+} */
