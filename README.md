@@ -1,2 +1,2 @@
 # DuYiJiuYeBan
-渡一网课学习记录
+JavaScript学习记录
