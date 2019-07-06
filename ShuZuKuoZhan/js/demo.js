@@ -42,12 +42,24 @@ var personArr = [{
     }
 ];
 
+// dom 感受事件发生 => 更改状态 => 影响视图
+// 需求的增加 事件越来越多 状态越来越多 管理状态 合并行为
+
 var oUl = document.getElementsByTagName('ul')[0];
 var oInput = document.getElementsByClassName('sText')[0];
 
+store.subscribe(function() {
+    alert(0);
+})
+store.getState('sex')
+
 //过滤全局状态
-var filterText = '';
-var filterSex = 'all';
+var state = {
+    text : '',
+    sex : 'all'
+}
+// var filterText = '';
+// var filterSex = 'all';
 // 数据渲染页面
 function RenderPage(data) {
     //遍历
@@ -68,27 +80,18 @@ RenderPage(personArr);
 
 // add input actions
 oInput.oninput = function () {
-    filterText = this.value;
-    var newArr = filterArrByText(personArr, filterText);
-    var newArr2 = filterArrBySex(newArr, filterSex);
+    state.text = this.value;
+    // var newArr = filterArrByText(personArr, state.text);
+    // var newArr2 = filterArrBySex(newArr, state.sex);
     // var filterText = this.value;
     //根据过滤条件 过滤之后的数组
     // var newArr = filterArrByText(personArr, filterText);
-    RenderPage(newArr2);
+    
+    RenderPage(lastFilterArr(personArr));
     // console.log(filterText);
 }
 
-// 根据文本来过滤的函数  纯函数
-function filterArrByText(data, text) {
-    if (!text) {
-        return data;
-    } else {
-        return data.filter(function (ele, index) {
-            // 王港 王 存在 != -1
-            return ele.name.indexOf(text) != -1;
-        })
-    }
-}
+
 
 //btn style
 var oBtnArr = [].slice.call(document.getElementsByClassName('btn'));
@@ -96,11 +99,11 @@ var lastActiveBtn = oBtnArr[0];
 oBtnArr.forEach(function (ele, index, self) {
     ele.onclick = function () {
         changeActive(this);
-        filterSex = this.getAttribute('sex');
-        var newArr = filterArrBySex(personArr, filterSex);
-        var newArr2 = filterArrByText(newArr, filterText);
+        state.sex = this.getAttribute('sex');
+        // var newArr = filterArrBySex(personArr, state.sex);
+        // var newArr2 = filterArrByText(newArr, state.text);
         // RenderPage(filterArrBySex(personArr, this.getAttribute('sex')));
-        RenderPage(newArr2);
+        RenderPage(lastFilterArr(personArr));
     }
 });
 
@@ -110,12 +113,4 @@ function changeActive(curActiveBtn) {
     lastActiveBtn = curActiveBtn;
 }
 
-function filterArrBySex(data, sex) {
-    if(sex == 'all') {
-        return data;
-    } else {
-        return data.filter(function (ele,index,self) {
-            return ele.sex == sex;
-        })
-    }
-}
+
