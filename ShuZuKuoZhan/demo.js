@@ -90,7 +90,7 @@ function filterArrByText(data, text) {
     }
 }
 
-//btn stye
+//btn style
 var oBtnArr = [].slice.call(document.getElementsByClassName('btn'));
 var lastActiveBtn = oBtnArr[0];
 oBtnArr.forEach(function (ele, index, self) {
