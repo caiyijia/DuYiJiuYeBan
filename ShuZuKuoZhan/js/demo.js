@@ -49,7 +49,8 @@ var oUl = document.getElementsByTagName('ul')[0];
 var oInput = document.getElementsByClassName('sText')[0];
 
 store.subscribe(function() {
-    alert(0);
+    // 更新页面试图
+    RenderPage(lastFilterArr(personArr));
 })
 store.getState('sex')
 
@@ -78,18 +79,23 @@ function RenderPage(data) {
 
 RenderPage(personArr);
 
-// add input actions
-oInput.oninput = function () {
-    state.text = this.value;
-    // var newArr = filterArrByText(personArr, state.text);
-    // var newArr2 = filterArrBySex(newArr, state.sex);
-    // var filterText = this.value;
-    //根据过滤条件 过滤之后的数组
-    // var newArr = filterArrByText(personArr, filterText);
-    
-    RenderPage(lastFilterArr(personArr));
-    // console.log(filterText);
+//  防抖
+function debounce(handler,delay) {
+    var timer = null;
+    return function(){
+        var self = this;
+        var arg = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+            handler.apply(self,arg);
+        },delay)
+    }
 }
+
+// add input actions
+oInput.oninput = debounce(function () { 
+    store.dispatch({type: 'text', value: this.value});
+}, 500)
 
 
 
@@ -99,11 +105,11 @@ var lastActiveBtn = oBtnArr[0];
 oBtnArr.forEach(function (ele, index, self) {
     ele.onclick = function () {
         changeActive(this);
-        state.sex = this.getAttribute('sex');
+        store.dispatch({type: 'sex', value: this.getAttribute('sex')});
         // var newArr = filterArrBySex(personArr, state.sex);
         // var newArr2 = filterArrByText(newArr, state.text);
         // RenderPage(filterArrBySex(personArr, this.getAttribute('sex')));
-        RenderPage(lastFilterArr(personArr));
+        // RenderPage(lastFilterArr(personArr));
     }
 });
 

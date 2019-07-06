@@ -2,7 +2,7 @@ function combineFilter(config) {
     return function (data) {
         for (var prop in config) {
             // console.log(prop, config[prop], state[prop])
-            data = config[prop](data, state[prop]);
+            data = config[prop](data, store.getState(prop));
         }
         return data;
     }

@@ -1,8 +1,8 @@
 function createStore (initialState) {
     var state = initialState || {};
     var list = [];
-    function getState() {
-        return state;
+    function getState(type) {
+        return state[type];
     }
     function dispatch(action) {
         state[action.type] = action.value;
