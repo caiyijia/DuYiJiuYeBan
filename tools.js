@@ -95,3 +95,20 @@ function getStyle(dom, attr) {
         return dom.currentStyle[attr];
     }
 }
+
+//深度克隆
+function deepClone (target, origin) {
+    var toStr = Object.prototype.toString,
+        arrObj = '[Object Array]',
+        target = target || {};
+    for(var prop in origin){
+        if(origin.hasOwnProperty(prop)){
+            if(typeof(origin[prop]) == 'object'){
+                target[prop] = toStr.call(origin[prop]) == arrObj ? [] : {};
+                deepClone(target[prop], origin[prop]);
+            }
+            target[prop] = origin[prop];
+        }
+    }
+    return target;
+}
