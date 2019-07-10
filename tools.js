@@ -112,3 +112,15 @@ function deepClone (target, origin) {
     }
     return target;
 }
+
+// 防抖
+function debounce (handler, delay) {
+    var timer;
+    return function () {
+        var _self = this, _arg = arguments;
+        clearTimeout(timer);
+        timer = setInterval(() => {
+            handler.apply(_self, _arg);
+        }, delay);
+    }
+}
