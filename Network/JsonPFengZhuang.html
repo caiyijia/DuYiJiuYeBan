@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>解析jquery源码中jsonp封装原理</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var $ = {
+        ajax: function (param) {
+            if (param.dataType == 'jasonp') {
+                var isOrigin = true;
+                var url = param.url;
+                if (window.location.host == url.split('/')[2]) {
+                    isOrigin = true;
+                } else {
+                    isOrigin = false;
+                }
+                // 同源
+                if (isOrgin) {
+                    var ajax = new XMLHttpRequest();
+                    ajax.open(param.type, param.url);
+                    ajax.send(param.data);
+                    ajax.onreadystatechange = function () {
+                        if(ajax.readyState == 4 && ajax.status == 200) {
+                            param.success(ajax.responseText);
+                        }
+                    }
+                }else {
+                    window.abc = param.success;
+                    var script = document.createElement('script');
+                    script.setAttribute('type','text/javascript');
+                    script.src = url;
+                    document.body.appendChild(script);
+                }
+            }
+        }
+    }
+    $.ajax({
+        type: 'GET',
+        url: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=abc&cb=abc',
+        dataType: 'jsonp',
+        success: function (data) {
+            console.log(data);
+        }
+    });
+</script>
+
+
+</html>
