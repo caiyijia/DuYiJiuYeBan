@@ -1,0 +1,15 @@
+div {
+    width: 200px;
+    height: 100px;
+    border: 1px solid #000;
+    position: absolute;
+    left:calc(50% - 50px);
+    top:calc(50% - 50px);
+    /* border-radius: 10px 30px 10px; */
+    /* 第一个值是椭圆的水平半径，第二个值是垂直半径 */
+    /* border-top-left-radius: 100px 100px; */
+    /* border-top-right-radius: 100px 100px; */
+    /* border-bottom-right-radius: 100px 100px; */
+    /* border-bottom-left-radius: 10px; */
+    border-radius: 10px 20px 30px 40px / 10px 20px 30px 40px;
+}
