@@ -1,15 +1,27 @@
 div {
     width: 200px;
-    height: 100px;
-    border: 1px solid #000;
+    height: 200px;
+    border: 1px solid #fff;
     position: absolute;
-    left:calc(50% - 50px);
-    top:calc(50% - 50px);
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+    background-color: transparent;
+    /* 1，x右偏移 2，y下便宜 3，模糊 4，spread */
+    /* box-shadow: 10px 10px 10px 10px #0ff;        */
+    box-shadow: inset 10px 10px 10px 10px #ff0,
+                inset -10px -10px 10px 10px #ff0,
+                10px 10px 10px 10px #0ff,
+                -10px -10px 10px 10px #00f;
+
     /* border-radius: 10px 30px 10px; */
     /* 第一个值是椭圆的水平半径，第二个值是垂直半径 */
     /* border-top-left-radius: 100px 100px; */
     /* border-top-right-radius: 100px 100px; */
     /* border-bottom-right-radius: 100px 100px; */
     /* border-bottom-left-radius: 10px; */
-    border-radius: 10px 20px 30px 40px / 10px 20px 30px 40px;
+    /* border-radius: 10px 20px 30px 40px / 10px 20px 30px 40px; */
+}
+
+body {
+    background-color: #000;
 }
