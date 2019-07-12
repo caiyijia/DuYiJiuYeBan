@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    position: absolute;
+    width: 700px;
+    height: 100px;
+    left: calc(50% - 350px);
+    font-size: 80px;
+    text-shadow: 10px 10px 3px #000, -10px -10px 3px blue;
+}
