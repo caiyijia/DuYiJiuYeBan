@@ -20,17 +20,19 @@
 .content {
     /* felx-grow 将剩下的区域按比例分配 */
     /* flex-grow: 1; */
-    /* flex-basis: 300px; */
+
+    /* flex-basis < 元素现实的区域 < width */
+    flex-basis: 190px;
 
     /* shrink计算时用的是真实内容区的大小（content），无关box-sizing */
     /* flex-shrink: 1; */
 
     /* 如果每个子级设置的宽度之和超出父级,那么真实显示的宽度为设置的非内容区（border，padding）加上内容区（字体宽度）大小 */
-    width: 400px;
+    width: 150px;
+    /* padding: 0 150px; */
     height: 200px;
     background: aliceblue;
     border: 1px solid green;
-    padding:0 100px;
     box-sizing: border-box;
 }
 
@@ -40,10 +42,5 @@
 
 .content:nth-of-type(2){
     /* flex-shrink: 1; */
-    
-}
-.content:nth-of-type(3) {
-    
-    /* width: 400px; */
-    /* flex-shrink: 3; */
+    opacity: 0.5;
 }
