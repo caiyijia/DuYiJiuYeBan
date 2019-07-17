@@ -8,24 +8,22 @@
     height: 300px;
     border: 1px solid black;
     display: flex;
+    /* flex-wrap默认值: nowrap */
     flex-wrap: wrap;
-    justify-content: center;
-    /* 针对单行元素对齐 */
-    /* align-items: center; */
-    
-    align-content: space-between;
-    /* flex-direction: column-reverse; */
+    /* justify-content: center; */
+
 }
 
 .content {
     width: 100px;
-    /* height: 100px; */
+    height: 100px;
     border: 1px solid green;
     box-sizing: border-box;
 }
-/* .content:first-of-type{
-    margin-top: 10px;
+.content:first-of-type{
+    /* margin-top: 10px; */
+    order: -1;
 }
 .content:nth-of-type(2) {
-    height: 200px;
-} */
+    order: -2;
+}
