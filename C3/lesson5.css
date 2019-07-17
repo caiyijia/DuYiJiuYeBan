@@ -4,43 +4,26 @@
 }
 
 .wrapper{
-    width: 600px;
-    height: 600px;
-    border: 1px solid black;
-    display: inline-flex;
-    /* flex-wrap默认值: nowrap */
-    /* flex-wrap: wrap; */
-
-    /* align-content > align-self > align-items */
-    /* align-items: flex-start; */
-    /* justify-content: center; */
-
-}
-
-.content {
-    /* felx-grow 将剩下的区域按比例分配 */
-    /* flex-grow: 1; */
-
-    /* flex-basis < 元素现实的区域 < width */
-    flex-basis: 190px;
-
-    /* shrink计算时用的是真实内容区的大小（content），无关box-sizing */
-    /* flex-shrink: 1; */
-
-    /* 如果每个子级设置的宽度之和超出父级,那么真实显示的宽度为设置的非内容区（border，padding）加上内容区（字体宽度）大小 */
-    width: 150px;
-    /* padding: 0 150px; */
+    width: 300px;
     height: 200px;
-    background: aliceblue;
-    border: 1px solid green;
-    box-sizing: border-box;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
 }
 
-/* 0 * 1 + 0 * 1 + 200 * 3 = 600 */
-
-
-
-.content:nth-of-type(2){
-    /* flex-shrink: 1; */
-    opacity: 0.5;
+.item {
+    flex: 1 1 auto;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 20px;
+    color: #f40;
+    border-radius: 5px;
 }
+
+.item:hover {
+    background-color: #f20;
+    color: #fff;
+}
+
+
