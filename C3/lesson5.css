@@ -4,26 +4,33 @@
 }
 
 .wrapper{
+    resize: both;
+    overflow: hidden;
     width: 300px;
-    height: 200px;
+    height: 300px;
     border: 1px solid black;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+
 }
 
-.item {
+.header,
+.footer,
+.left,
+.right {
+    flex:0 0 20%;
+    border: 1px solid green;
+    box-sizing: border-box;
+}
+
+.contain {
     flex: 1 1 auto;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    font-size: 20px;
-    color: #f40;
-    border-radius: 5px;
+    display: flex;
 }
 
-.item:hover {
-    background-color: #f20;
-    color: #fff;
+.center {
+    flex: 1 1 auto;
 }
+
 
 
