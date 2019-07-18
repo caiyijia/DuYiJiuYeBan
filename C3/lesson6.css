@@ -11,7 +11,7 @@ div {
     top: 0;
     opacity: .5;
     background-color: red;
-    transition:all 1s;
+    transition:all 1s cubic-bezier(0.5, -1.5, 0.165, 1);
 }
 div:hover {
     background-color: aliceblue;
