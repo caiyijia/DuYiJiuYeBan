@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: .5;
+    background-color: red;
+    transition:all 1s;
+}
+div:hover {
+    background-color: aliceblue;
+    opacity: 1;
+    left: 100px;
+    top: 100px;
+    width: 200px;
+    height: 200px;
+}
