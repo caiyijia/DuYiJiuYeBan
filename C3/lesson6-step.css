@@ -3,29 +3,48 @@
     padding: 0;
 }
 
-@keyframes change-color {
+@keyframes cursor {
     0% {
-        background-color: red;
-    }
-    25% {
-        background-color: green;
+        border-left-color: rgba(0,0,0,0);
     }
     50% {
-        background-color: blue;
-    }
-    75% {
-        background-color: black;
+        border-left-color: rgba(0,0,0,1);
     }
     100% {
-        background-color: #fff;
+        border-left-color: rgba(0,0,0,0);
+    }
+}
+
+@keyframes cover {
+    0% {
+        left:0;
+    }
+    100% {
+        left: 100%;
     }
 }
 
 div {
-    width: 100px;
+    position: relative;
+    display: inline-block;
     height: 100px;
-    background-color: red;
-    animation: change-color 4s steps(10, end);
+    /* background-color: red; */
+    font-size: 80px;
+    line-height: 100px;
+    font-family: monospace;
+}
+
+div::after {
+    content:"";
+    position: absolute;
+    left:0;
+    top: 10px;
+    height: 90px;
+    width: 100%;
+    background-color: #fff;
+    border-left: 2px solid black;
+    box-sizing: border-box;
+    animation: cursor 1s steps(1,end) infinite, cover 26s steps(26, end);
 }
 
 /* 
