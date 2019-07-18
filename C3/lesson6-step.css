@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes change-color {
+    0% {
+        background-color: red;
+    }
+    25% {
+        background-color: green;
+    }
+    50% {
+        background-color: blue;
+    }
+    75% {
+        background-color: black;
+    }
+    100% {
+        background-color: #fff;
+    }
+}
+
+div {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    animation: change-color 4s steps(10, end);
+}
+
+/* 
+end: 保留当前帧状态，直到动画结束；
+start: 保留下一帧状态
+
+*/
