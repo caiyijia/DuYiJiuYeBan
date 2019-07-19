@@ -10,25 +10,22 @@
         margin: 0;
         padding: 0;
     }
-    @keyframes round {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
+    body{
+        perspective: 800px;
+        transform-style: preserve-3d;
     }
     div {
         position: absolute;
-        left:calc(50% - 100px);
-        top: calc(50% - 100px);
+        left:200px;
+        top: 200px;
         background-image: url(img/mayun.jpg);
         background-size: cover;
         width: 200px;
         height: 200px;
-        transform: rotate(0deg);
+        /* transform: rotatex(0deg) rotateY(0deg) rotatez(0deg); */
+        transform: rotate3d(1,1,1,0deg);
         transform-origin: 0 0;
-        animation: round 2s infinite;
+        /* animation: round 2s infinite; */
     }
     </style>
 </head>
