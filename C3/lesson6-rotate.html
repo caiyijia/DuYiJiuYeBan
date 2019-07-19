@@ -14,7 +14,7 @@
         height: 100%;
     }
     body{
-        perspective: 800px;
+        /* perspective: 800px; */
         height: 100%;
         /* transform-style: preserve-3d; */
         /* perspective-origin: 300px 300px; */
@@ -32,7 +32,7 @@
         background-size: cover;
         position: absolute;
         top: 200px;
-        transform: rotatey(45deg);
+        transform: perspective(800px) rotatey(45deg);
     }
     .content1{
         left: 200px;
@@ -58,13 +58,5 @@
     <div class="content4"></div>
     <div class="content5"></div>
 
-    <script type="text/javascript"> 
-        document.body.onmousemove = function (e) {
-            // 不要忘记空格'px '
-            this.style.perspectiveOrigin = "" + e.pageX + "px " + e.pageY + "px";
-        }
-    
-    
-    </script>
 </body>
 </html>
