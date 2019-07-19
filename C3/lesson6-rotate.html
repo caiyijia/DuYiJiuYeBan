@@ -13,7 +13,9 @@
     body{
         perspective: 800px;
         transform-style: preserve-3d;
+        perspective-origin: 300px 300px;
     }
+    
     div {
         position: absolute;
         left:200px;
@@ -23,9 +25,11 @@
         width: 200px;
         height: 200px;
         /* transform: rotatex(0deg) rotateY(0deg) rotatez(0deg); */
-        transform: rotate3d(1,1,1,0deg);
+        /* transform: rotate3d(1,1,1,0deg); */
         transform-origin: 0 0;
-        /* animation: round 2s infinite; */
+        transform:rotatey(90deg)scalez(2) rotateX(40deg) ;
+
+        /* scale实际上伸缩的是坐标轴上的刻度 */
     }
     </style>
 </head>
