@@ -10,53 +10,36 @@
         margin: 0;
         padding: 0;
     }
-    :root {
-        height: 100%;
-    }
+
     body{
-        /* perspective: 800px; */
-        height: 100%;
-        /* transform-style: preserve-3d; */
-        /* perspective-origin: 300px 300px; */
+        perspective: 800px;
+        perspective-origin: 300px 100px;
     }
 
-    
-    .content1,
-    .content2,
-    .content3,
-    .content4,
-    .content5{
+    .wrapper {
+        position: absolute;
+        top: 200px;
+        left: 200px;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        transform: rotateY(0deg);
+        transform-style: preserve-3d;
+    }
+
+    .demo {
         width: 200px;
         height: 200px;
         background-image: url(img/mayun.jpg);
         background-size: cover;
-        position: absolute;
-        top: 200px;
-        transform: perspective(800px) rotatey(45deg);
-    }
-    .content1{
-        left: 200px;
-    }
-    .content2 {
-        left: 400px;
-    }
-    .content3 {
-        left: 600px;
-    }
-    .content4 {
-        left: 800px;
-    }
-    .content5 {
-        left: 1000px;
+        transform: translateZ(100px);
     }
     </style>
 </head>
 <body>
-    <div class="content1"></div>
-    <div class="content2"></div>
-    <div class="content3"></div>
-    <div class="content4"></div>
-    <div class="content5"></div>
+    <div class="wrapper">
+        <div class="demo"></div>
+    </div>
 
 </body>
 </html>
