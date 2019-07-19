@@ -15,6 +15,21 @@
         transform-style: preserve-3d;
         perspective-origin: 300px 300px;
     }
+
+    @keyframes skewchange {
+        0% {
+            transform: skew(0, 0);
+        }
+        50% {
+            transform: skew(45deg, 45deg);
+        }
+        75% {
+            transform: skew(60deg, 60deg);
+        }
+        100% {
+            transform: skew(90deg, 90deg);
+        }
+    }
     
     div {
         position: absolute;
@@ -26,8 +41,9 @@
         height: 200px;
         /* transform: rotatex(0deg) rotateY(0deg) rotatez(0deg); */
         /* transform: rotate3d(1,1,1,0deg); */
-        transform-origin: 0 0;
-        transform:rotatey(90deg)scalez(2) rotateX(40deg) ;
+        transform-origin: center center;
+        transform:skew(45deg, 0deg);
+        animation: skewchange 2s cubic-bezier(0,0,1,1) infinite alternate;
 
         /* scale实际上伸缩的是坐标轴上的刻度 */
     }
