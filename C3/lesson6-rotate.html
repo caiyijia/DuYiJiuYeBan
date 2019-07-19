@@ -10,46 +10,61 @@
         margin: 0;
         padding: 0;
     }
+    :root {
+        height: 100%;
+    }
     body{
         perspective: 800px;
-        transform-style: preserve-3d;
-        perspective-origin: 300px 300px;
+        height: 100%;
+        /* transform-style: preserve-3d; */
+        /* perspective-origin: 300px 300px; */
     }
 
-    @keyframes skewchange {
-        0% {
-            transform: skew(0, 0);
-        }
-        50% {
-            transform: skew(45deg, 45deg);
-        }
-        75% {
-            transform: skew(60deg, 60deg);
-        }
-        100% {
-            transform: skew(90deg, 90deg);
-        }
-    }
     
-    div {
-        position: absolute;
-        left:200px;
-        top: 200px;
-        background-image: url(img/mayun.jpg);
-        background-size: cover;
+    .content1,
+    .content2,
+    .content3,
+    .content4,
+    .content5{
         width: 200px;
         height: 200px;
-        /* transform: rotatex(0deg) rotateY(0deg) rotatez(0deg); */
-        /* transform: rotate3d(1,1,1,0deg); */
-        transform-origin: center center;
-        transform:skew(45deg, 0deg);
-        animation: skewchange 2s cubic-bezier(0,0,1,1) infinite alternate;
-
-        /* scale实际上伸缩的是坐标轴上的刻度 */
+        background-image: url(img/mayun.jpg);
+        background-size: cover;
+        position: absolute;
+        top: 200px;
+        transform: rotatey(45deg);
+    }
+    .content1{
+        left: 200px;
+    }
+    .content2 {
+        left: 400px;
+    }
+    .content3 {
+        left: 600px;
+    }
+    .content4 {
+        left: 800px;
+    }
+    .content5 {
+        left: 1000px;
     }
     </style>
 </head>
 <body>
-    <div></div>
+    <div class="content1"></div>
+    <div class="content2"></div>
+    <div class="content3"></div>
+    <div class="content4"></div>
+    <div class="content5"></div>
+
+    <script type="text/javascript"> 
+        document.body.onmousemove = function (e) {
+            // 不要忘记空格'px '
+            this.style.perspectiveOrigin = "" + e.pageX + "px " + e.pageY + "px";
+        }
+    
+    
+    </script>
 </body>
 </html>
