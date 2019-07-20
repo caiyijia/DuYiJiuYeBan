@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas画布</title>
+    <style>
+        canvas {
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <!-- 画布的实际大小：行间样式没用，执行<style>中的。但是，画笔执行按照行间样式。-->
+    
+    <canvas width="400" height="400" id="cans"></canvas>
+
+
+    <script>
+    var oCanvas = document.getElementById('cans');
+    // 创建画笔，获取到的CanvasRanderingContext2D对象
+    var ctx = oCanvas.getContext('2d');
+    // 画笔移动到(x, y)
+    ctx.moveTo(100, 100);
+    // 从moveTo()开始绘制到(x, y)
+    ctx.lineTo(200, 100);
+    ctx.lineTo(200, 200);
+    // 闭合当前路径
+    ctx.closePath();
+    // 填充
+    ctx.fill();
+    // 🖌️粗细；
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = 'red';
+    // 真正执行
+    ctx.stroke();
+    // beginPath开始另一路径的子集
+    ctx.beginPath();
+    ctx.moveTo(100,100);
+    ctx.lineTo(200, 200);
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = 'green';
+    ctx.closePath();
+    ctx.stroke();
+    
+    </script>
+</body>
+</html>
