@@ -6,9 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Canvas画布</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
         canvas {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             border: 1px solid black;
         }
     </style>
@@ -17,6 +21,7 @@
     <!-- 画布的实际大小：行间样式没用，执行<style>中的。但是，画笔执行按照行间样式。-->
     
     <canvas width="400" height="400" id="cans"></canvas>
+    <canvas width="400" height="400" id="cvs"></canvas>
 
 
     <script>
@@ -37,7 +42,7 @@
     ctx.strokeStyle = 'red';
     // 真正执行
     ctx.stroke();
-    // beginPath开始另一路径的子集
+    // beginPath开始另一路径的子集。！！！
     ctx.beginPath();
     ctx.moveTo(100,100);
     ctx.lineTo(200, 200);
@@ -46,6 +51,30 @@
     ctx.closePath();
     ctx.stroke();
     
+
+    var canvas = document.getElementById('cvs');
+    var pen = cvs.getContext('2d');
+
+    pen.strokeRect(100, 100, 100, 100);
+    // 以下都没用
+    pen.strokeStyle = 'blue';
+    pen.fill();
+    pen.stroke();
+    
+    // 清理
+    pen.clearRect(0,0,300,300);
+
+    pen.fillRect(100, 100, 100, 100); 
+
+    var y = 100;
+    var timer = setInterval(() => {
+        pen.clearRect(0, 0, 400, 400);
+        pen.fillRect(100, y, 100, 100);
+        y += 10;
+        if(y > 300) {
+            clearInterval(timer);
+        }
+    }, 100);
     </script>
 </body>
 </html>
