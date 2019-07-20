@@ -25,7 +25,8 @@
 
     <canvas width="400" height="400" id="cans"></canvas>
     <canvas width="400" height="400" id="cvs"></canvas>
-
+    <canvas width="400" height="400" id="cvs1"></canvas>
+    
 
     <script>
         var oCanvas = document.getElementById('cans');
@@ -103,7 +104,7 @@
         pen.save();
         // pen.scale(2, 0.5);
         pen.rotate(Math.PI / 4);
-        pen.fillRect(0,0,100,100);
+        pen.fillRect(0, 0, 100, 100);
         // 恢复到到上一个save()的状态。实际上是从栈内取出上一个save（）的状态。
         pen.restore();
         pen.fillStyle = 'red';
@@ -114,7 +115,24 @@
         pen.fillRect(0, 0, 50, 50);
         // pen.translate(-100, -100);
         // pen.fillRect(100,100,100,100);
-        
+
+        pen.translate(100, 100);
+        // 先重置再变换
+        pen.setTransform(1, 1, 0, 0.5, 100, 100);
+        pen.fillRect(0, 0, 100, 100);
+
+        var canvas1 = document.getElementById('cvs1');
+        var pen1 = cvs1.getContext('2d');
+
+        var img = new Image();
+        img.src = '../C3/img/mayun.jpg';
+        // 需要等待图片加载完成后再绘制
+        img.onload = () => {
+            var bg = pen1.createPattern(img, 'no-repeat');
+            pen1.fillStyle = bg;
+            pen1.fillRect(0, 0, 300, 200);
+        };
+
     </script>
 </body>
 
