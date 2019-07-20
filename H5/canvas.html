@@ -90,12 +90,31 @@
         // pen.arcTo(100, 100, 100, 200, 10);
         // pen.stroke();
 
-        pen.moveTo(100, 100);
-        // 二次贝塞尔曲线
-        // pen.quadraticCurveTo(200, 300, 300, 300);
-        // 三次贝塞尔曲线
-        pen.bezierCurveTo(200,300,200,200,400,300);
-        pen.stroke();
+        // pen.moveTo(100, 100);
+        // // 二次贝塞尔曲线
+        // // pen.quadraticCurveTo(200, 300, 300, 300);
+        // // 三次贝塞尔曲线
+        // pen.bezierCurveTo(200,300,200,200,400,300);
+        // pen.stroke();
+
+        // 保存当前坐标轴状态, 保存在栈内。
+        pen.save();
+        pen.translate(100, 100);
+        pen.save();
+        // pen.scale(2, 0.5);
+        pen.rotate(Math.PI / 4);
+        pen.fillRect(0,0,100,100);
+        // 恢复到到上一个save()的状态。实际上是从栈内取出上一个save（）的状态。
+        pen.restore();
+        pen.fillStyle = 'red';
+        pen.fillRect(0, 0, 50, 50);
+        // 再次取出，相当于恢复到上上次的状态。
+        pen.restore();
+        pen.fillStyle = '#f40';
+        pen.fillRect(0, 0, 50, 50);
+        // pen.translate(-100, -100);
+        // pen.fillRect(100,100,100,100);
+        
     </script>
 </body>
 
