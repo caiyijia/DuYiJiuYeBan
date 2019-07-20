@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
             margin: 0;
             padding: 0;
         }
+
         canvas {
             width: 400px;
             height: 400px;
@@ -17,64 +19,70 @@
         }
     </style>
 </head>
+
 <body>
     <!-- 画布的实际大小：行间样式没用，执行<style>中的。但是，画笔执行按照行间样式。-->
-    
+
     <canvas width="400" height="400" id="cans"></canvas>
     <canvas width="400" height="400" id="cvs"></canvas>
 
 
     <script>
-    var oCanvas = document.getElementById('cans');
-    // 创建画笔，获取到的CanvasRanderingContext2D对象
-    var ctx = oCanvas.getContext('2d');
-    // 画笔移动到(x, y)
-    ctx.moveTo(100, 100);
-    // 从moveTo()开始绘制到(x, y)
-    ctx.lineTo(200, 100);
-    ctx.lineTo(200, 200);
-    // 闭合当前路径
-    ctx.closePath();
-    // 填充
-    ctx.fill();
-    // 🖌️粗细；
-    ctx.lineWidth = 10;
-    ctx.strokeStyle = 'red';
-    // 真正执行
-    ctx.stroke();
-    // beginPath开始另一路径的子集。！！！
-    ctx.beginPath();
-    ctx.moveTo(100,100);
-    ctx.lineTo(200, 200);
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = 'green';
-    ctx.closePath();
-    ctx.stroke();
-    
+        var oCanvas = document.getElementById('cans');
+        // 创建画笔，获取到的CanvasRanderingContext2D对象
+        var ctx = oCanvas.getContext('2d');
+        // 画笔移动到(x, y)
+        ctx.moveTo(100, 100);
+        // 从moveTo()开始绘制到(x, y)
+        ctx.lineTo(200, 100);
+        ctx.lineTo(200, 200);
+        // 闭合当前路径
+        ctx.closePath();
+        // 填充
+        ctx.fill();
+        // 🖌️粗细；
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = 'red';
+        // 真正执行
+        ctx.stroke();
+        // beginPath开始另一路径的子集。！！！
+        ctx.beginPath();
+        ctx.moveTo(100, 100);
+        ctx.lineTo(200, 200);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = 'green';
+        ctx.closePath();
+        ctx.stroke();
 
-    var canvas = document.getElementById('cvs');
-    var pen = cvs.getContext('2d');
 
-    pen.strokeRect(100, 100, 100, 100);
-    // 以下都没用
-    pen.strokeStyle = 'blue';
-    pen.fill();
-    pen.stroke();
-    
-    // 清理
-    pen.clearRect(0,0,300,300);
+        var canvas = document.getElementById('cvs');
+        var pen = cvs.getContext('2d');
 
-    pen.fillRect(100, 100, 100, 100); 
+        pen.strokeRect(100, 100, 100, 100);
+        // 以下都没用
+        pen.strokeStyle = 'blue';
+        pen.fill();
+        pen.stroke();
 
-    var y = 100;
-    var timer = setInterval(() => {
-        pen.clearRect(0, 0, 400, 400);
-        pen.fillRect(100, y, 100, 100);
-        y += 10;
-        if(y > 300) {
-            clearInterval(timer);
-        }
-    }, 100);
+        // 清理
+        pen.clearRect(0, 0, 300, 300);
+
+        // pen.fillRect(100, 100, 100, 100); 
+
+        // var y = 100;
+        // var timer = setInterval(() => {
+        //     pen.clearRect(0, 0, 400, 400);
+        //     pen.fillRect(100, y, 100, 100);
+        //     y += 10;
+        //     if(y > 300) {
+        //         clearInterval(timer);
+        //     }
+        // }, 100);
+        pen.moveTo(100, 100);
+        pen.arc(100, 100, 50, 0, Math.PI / 4, 1);
+        pen.closePath();
+        pen.stroke();
     </script>
 </body>
+
 </html>
