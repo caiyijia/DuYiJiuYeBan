@@ -8,13 +8,15 @@
     <title>canvas实现刮刮乐</title>
     <style>
         canvas {
+            width: 500px;
+            height: 500px;
             border: 1px solid #000;
         }
     </style>
 </head>
 
 <body>
-    <canvas width="500" height="500"></canvas>
+    <canvas width="1000" height="1000"></canvas>
 
     <script>
         var oConvas = document.getElementsByTagName('canvas')[0];
@@ -35,14 +37,25 @@
         // ctx.fillRect(200, 200, 200, 200);
         // // ctx.restore();
         // // ctx.fillRect(0,0,100,100);
-        var img = new Image();
-        img.src = '../c3/img/mayun.jpg';
-        img.onload = () => {
-            // void ctx.drawImage(image, dx, dy);
-            // void ctx.drawImage(image, dx, dy, dWidth, dHeight);
-            // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-            ctx.drawImage(img, 80, 80, 100, 100);
-        }
+        // var img = new Image();
+        // img.src = '../c3/img/mayun.jpg';
+        // img.onload = () => {
+        //     // void ctx.drawImage(image, dx, dy);
+        //     // void ctx.drawImage(image, dx, dy, dWidth, dHeight);
+        //     // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+        //     ctx.drawImage(img, 50, 50, 200, 200, 100, 100, 100, 100);
+        // }
+
+        // 命中检测 
+        ctx.moveTo(100, 100);
+        ctx.lineTo(200, 100);
+        // ctx.lineTo(200, 200);
+        ctx.stroke();
+        // 非零绕数原则 是否在闭合路径上
+        console.log(ctx.isPointInPath(150,100)); // 在chrome上，被判断为非闭合路径，返回false
+        console.log(ctx.isPointInStroke(150,100)); // 判断是否在线段上，返回true
+
+        
     </script>
 </body>
 
