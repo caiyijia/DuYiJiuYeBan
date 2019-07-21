@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas实现刮刮乐</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+
+    <script>
+        var oConvas = document.getElementsByTagName('canvas')[0];
+        var ctx = oConvas.getContext('2d');
+        // ctx.arc(200,200,100,0,Math.PI * 2, 0);
+        // ctx.fillStyle = 'red';
+        // ctx.fill();
+        // // 可在截取前先存一次画布。
+        // // ctx.save();
+        // // // 将所画区域截取，剩余画布不可用。
+        // // ctx.clip();
+        // // ctx.beginPath();
+
+        // // 一共有12种 globalCompositeOperation
+        // ctx.globalCompositeOperation = "destination-out";
+        // ctx.fillStyle = 'green';
+        // ctx.globalAlpha = 0.5;
+        // ctx.fillRect(200, 200, 200, 200);
+        // // ctx.restore();
+        // // ctx.fillRect(0,0,100,100);
+        var img = new Image();
+        img.src = '../c3/img/mayun.jpg';
+        img.onload = () => {
+            // void ctx.drawImage(image, dx, dy);
+            // void ctx.drawImage(image, dx, dy, dWidth, dHeight);
+            // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+            ctx.drawImage(img, 80, 80, 100, 100);
+        }
+    </script>
+</body>
+
+</html>
