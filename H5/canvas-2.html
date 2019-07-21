@@ -11,6 +11,9 @@
             width: 500px;
             height: 500px;
             border: 1px solid #000;
+            background-image: url('../C3/img/mayun.jpg');
+            background-size: contain;
+            background-position: center;
         }
     </style>
 </head>
@@ -21,6 +24,57 @@
     <script>
         var oConvas = document.getElementsByTagName('canvas')[0];
         var ctx = oConvas.getContext('2d');
+        ctx.fillStyle = '#ccc';
+        ctx.fillRect(0, 0, 500 * 2, 500 * 2);
+        var startX, startY;
+        var bindEvent = () =>
+            oConvas.onmousedown = mouseDown;
+
+        var mouseDown = (e) => {
+            startX = e.offsetX;
+            startY = e.offsetY;
+            oConvas.onmousemove = mouseMove;
+            document.onmouseup = mouseUp;
+        }
+        var mouseMove = (e) => {
+            var x = e.offsetX;
+            var y = e.offsetY;
+            // console.log(ctx.getImageData(0, 0, 500, 500));
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.lineWidth = 40;
+            ctx.lineCap = 'round';
+            ctx.moveTo(startX * 2, startY * 2);
+            ctx.lineTo(x * 2, y * 2);
+            
+            ctx.stroke();
+            startX = x;
+            startY = y;
+        }
+        var mouseUp = (e) => {
+            clearAll();
+            oConvas.onmousemove = (e) => false;
+            document.onmouseup = (e) => false;
+        }
+        bindEvent();
+        var clearAll = (e) => {
+            console.log(ctx.getImageData(0, 0, 1000, 1000))
+            var pixel = ctx.getImageData(0, 0, 1000, 1000);
+            var data = pixel.data;
+            var height = pixel.height;
+            var width = pixel.width;
+            var dataL = data.length;
+            var count = 0;
+            // console.log(data[3]);
+            for(let i = 3; i < dataL; i +=4) {
+                if(data[i] == 0) {
+                    ++count;
+                }
+            }
+            var area = width * height * 0.5;
+            if(count > area) {
+                ctx.clearRect(0, 0, 1000, 1000);
+            }
+        };
         // ctx.arc(200,200,100,0,Math.PI * 2, 0);
         // ctx.fillStyle = 'red';
         // ctx.fill();
@@ -46,16 +100,14 @@
         //     ctx.drawImage(img, 50, 50, 200, 200, 100, 100, 100, 100);
         // }
 
-        // 命中检测 
-        ctx.moveTo(100, 100);
-        ctx.lineTo(200, 100);
-        // ctx.lineTo(200, 200);
-        ctx.stroke();
-        // 非零绕数原则 是否在闭合路径上
-        console.log(ctx.isPointInPath(150,100)); // 在chrome上，被判断为非闭合路径，返回false
-        console.log(ctx.isPointInStroke(150,100)); // 判断是否在线段上，返回true
-
-        
+        // // 命中检测 
+        // ctx.moveTo(100, 100);
+        // ctx.lineTo(200, 100);
+        // // ctx.lineTo(200, 200);
+        // ctx.stroke();
+        // // 非零绕数原则 是否在闭合路径上
+        // console.log(ctx.isPointInPath(150,100)); // 在chrome上，被判断为非闭合路径，返回false
+        // console.log(ctx.isPointInStroke(150,100)); // 判断是否在线段上，返回true
     </script>
 </body>
 
