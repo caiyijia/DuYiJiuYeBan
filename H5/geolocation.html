@@ -9,18 +9,40 @@
 </head>
 
 <body>
-
+    <div id="demo">geolocation</div>
     <script>
-        var success = e => console.log('success', e);
+        // var success = e => console.log('success', e);
 
-        var error = e => console.log('error', e);
+        // var error = e => console.log('error', e);
 
-        var options = {
-            timeout: 1000,
-            enableHighAccuracy: true,
-        }
+        // var options = {
+        //     timeout: 1000,
+        //     enableHighAccuracy: true,
+        // }
 
-        window.navigator.geolocation.getCurrentPosition(success, error);
+        // window.navigator.geolocation.getCurrentPosition(success, error);
+
+        var speed = 25;
+        var lastTime = 0;
+        var lastX = 0, lastY = 0, lastZ = 0;
+        window.addEventListener('devicemotion', (event) => {
+            console.log(event);
+            demo.innerHTML = 'acceleration<br> x: ' + event.acceleration.x + '<br/> y:' + event.acceleration.y + '<br/> z:' + event.acceleration.z + '<br> accelerationIncludingGravity <br> x: ' + event.accelerationIncludingGravity.x + '<br/> y:' + event.accelerationIncludingGravity.y + '<br/> z:' + event.accelerationIncludingGravity.z;
+            var x = event.acceleration.x;
+            var y = event.acceleration.y;
+            var z = event.acceleration.z;
+            var nowTime = (new Date()).getTime();
+            if (nowTime - lastTime > 500) {
+                lastTime = nowTime;
+                if(Math.abs(x - lastX) > speed || Math.abs(y - lastY) > speed || Math.abs(z - lastZ) > speed) {
+                    alert('摇一摇');
+                    lastX = x;
+                    lastY = y;
+                    lastZ = z;
+                }
+            }
+            });
+        
     </script>
 </body>
 
