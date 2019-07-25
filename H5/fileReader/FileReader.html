@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FileReader/WebSocket</title>
+    <style>
+        img {
+            height: 300px;
+            width: 300px;
+            /* position: absolute; */
+        }
+        .progress {
+            width: 300px;
+            height: 30px;
+            border: 1px solid #000;
+        }
+        .bar {
+            width: 0;
+            height: 30px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <input type="file">
+    <img src="" alt="">
+    <div class="progress">
+        <div class="bar"></div>
+    </div>
+    <span class="text"></span>
+    <button class="abort">终止</button>
+
+    <script src="./fileReader.js"></script>
+    <script>
+        // var reader = new FileReader();
+        var inp = document.getElementsByTagName('input')[0];
+        var img = document.getElementsByTagName('img')[0];
+        var bar = document.getElementsByClassName('bar')[0];
+        var text = document.getElementsByClassName('text')[0];
+        var btn = document.getElementsByClassName('abort')[0];
+        inp.onchange = (e) => {
+            console.log(inp.files);
+            // reader.readAsDataURL(inp.files[0]);
+            var reader = new PartFileReader(inp.files[0], 'readAsDataURL', {
+                loadStart: function (e) {
+                    console.log('start', e)
+                },
+                progress: function (e, loaded, total) {
+                    var percent = e.loaded / e.total * 100;
+                    var width = Math.round(300 * percent / 100);
+                    bar.style.width = width + 'px';
+                    text.innerHTML = Math.round(percent) + '%';
+                },
+                loadend: function(e) {
+                    console.log('abort', e)
+                }
+            });
+        }
+        // reader.onloadstart = (e) => {
+
+        // }
+        // reader.onprogress = (e) => {
+        //     var percent = e.loaded / e.total * 100;
+        //     var width = Math.round(300 * percent / 100);
+        //     bar.style.width = width + 'px';
+        //     text.innerHTML = percent + '%';
+        // }
+        // reader.onload = (e) => {
+        //     img.src = this.result;
+        // }
+        // reader.onloadend = (e) => {
+        //     console.log('end', e);
+        // }
+        // btn.onclick = (e) => {
+        //     reader.abort();
+        // }
+    </script>
+</body>
+</html>
