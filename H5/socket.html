@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var socket = new WebSocket('ws://echo.websocket.org/');
+        socket.onopen = e => socket.send('hi');
+        socket.onmessage = e => {
+            console.log(e.data);
+            socket.close();
+            socket.send('hi');
+            console.log('closing', socket.readyState);
+        };
+        socket.onclose = e => console.log(socket.readyState);
+        socket.onerror = e => console.log(e);
+    </script>
+</body>
+
+</html>
