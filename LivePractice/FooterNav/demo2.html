@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>相对绝对定位</title>
     <style>
-        html, body {
+        html,
+        body {
             margin: 0;
             padding: 0;
             height: 100%;
             width: 100%;
             font-size: 8vw;
         }
+
         footer {
             background-color: #ccc;
             width: 100%;
             height: 1.5rem;
         }
+
         .box {
             position: relative;
             height: 100%;
         }
+
         .roll {
             position: absolute;
             bottom: 1.5rem;
@@ -31,16 +36,47 @@
             height: 100rem;
 
         }
+
         footer {
             position: absolute;
             bottom: 0;
         }
+
+        .fixed {
+            position: fixed;
+            top: 0;
+        }
     </style>
 </head>
+
 <body>
     <div class="box">
         <div class="roll">滚动区域</div>
         <footer>底部固定菜单</footer>
     </div>
+
+    <script>
+        var fixedDom = document.getElementsByTagName('footer')[0];
+        window.addEventListener('scroll', winScroll);
+
+        function winScroll(e) {
+            // console.log(e);
+            var viewTop = window.innerHeight;
+            var elementScrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+            var top = viewTop - elementScrollTop;
+            console.log(top);
+            // if(top < fixedDom.offsetHeight) {
+            //     console.log('change');
+            //     fixedDom.classList.add("fixed");
+            //     }else {
+            //         fixedDom.classList.remove('fixed');
+            //     }
+            top < fixedDom.offsetHeight ? fixedDom.classList.add("fixed") : fixedDom.classList.remove('fixed');
+            
+        }
+        
+        
+    </script>
 </body>
+
 </html>
