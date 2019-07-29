@@ -1,16 +1,19 @@
 {
   "name": "practice",
   "version": "1.0.0",
-  "description": "",
+  "description": "webpack learn",
   "main": "demo.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack"
   },
-  
   "author": "YijiaCai",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^3.1.0",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.38.0"
   },
   "dependencies": {

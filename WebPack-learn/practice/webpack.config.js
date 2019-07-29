@@ -8,6 +8,11 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js'
     },
+    module: {
+        rules: [
+            {test: /\.less$/, use: ['style-loader','css-loader','less-loader']}
+        ]
+    },
     mode: 'development'
 }
 
