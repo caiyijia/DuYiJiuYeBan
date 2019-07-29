@@ -1,4 +1,5 @@
 var path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     entry:  {
         index: './src/index.js',
@@ -13,6 +14,9 @@ module.exports = {
             {test: /\.less$/, use: ['style-loader','css-loader','less-loader']}
         ]
     },
+    plugins: [
+        new HtmlWebpackPlugin()
+    ],
     mode: 'development'
 }
 
