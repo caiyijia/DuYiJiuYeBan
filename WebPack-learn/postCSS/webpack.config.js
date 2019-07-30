@@ -1,12 +1,14 @@
 var path = require('path');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin')
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     entry: {
         index: './index.js'
     },
     output: {
         path:path.resolve(__dirname, 'dist'),
-        filename: '[name].bundle.js'
+        filename: '[name][hash:5].bundle.js'
     },
     module: {
         rules: [
@@ -39,8 +41,20 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '[name].css'
-        })
+            filename: '[name][hash:5].css'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'My Html',
+            filename: 'index.html',
+            template: './index.html',
+            
+            minify: {
+                // 清理注释
+                removeComments: true,
+                collapseWhitespace: true
+            }
+        }),
+        new CleanWebpackPlugin()
     ]
         
     
