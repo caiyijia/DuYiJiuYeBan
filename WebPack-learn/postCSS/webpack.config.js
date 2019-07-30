@@ -4,11 +4,33 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     entry: {
-        index: './index.js'
+        // index: './index.js'
+        pageA: './src/pageA.js',
+        pageB: './src/pageB.js'
     },
     output: {
         path:path.resolve(__dirname, 'dist'),
-        filename: '[name][hash:5].bundle.js'
+        filename: '[name][hash:5].bundle.js',
+        chunkFilename: '[name][hash:5].js'
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                comman: {
+                    name: 'common',
+                    chunks: 'all',
+                    minSize: 1,
+                    minChunks: 2,
+                    priority: 1
+                },
+                vender: {
+                    name:'vender',
+                    test:/[\\/]node_modules[\\/]/,
+                    priority: 10,
+                    chunks: 'all'
+                }
+            }
+        }
     },
     module: {
         rules: [
