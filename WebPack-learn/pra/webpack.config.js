@@ -45,6 +45,17 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: 'html-loader',
+                        options: {
+                            attrs:['img:src']
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -57,8 +68,8 @@ module.exports = {
 
             minify: {
                 // 清理注释
-                removeComments: true
-                // collapseWhitespace: true
+                removeComments: true,
+                collapseWhitespace: true  
             }
         })
     ]
