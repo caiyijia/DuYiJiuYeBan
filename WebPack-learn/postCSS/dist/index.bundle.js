@@ -86,14 +86,14 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./demo.css":
-/*!******************!*\
-  !*** ./demo.css ***!
-  \******************/
+/***/ "./demo.less":
+/*!*******************!*\
+  !*** ./demo.less ***!
+  \*******************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./demo.css?");
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./demo.less?");
 
 /***/ }),
 
@@ -105,7 +105,7 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./demo
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _demo_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./demo.css */ \"./demo.css\");\n/* harmony import */ var _demo_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo_css__WEBPACK_IMPORTED_MODULE_0__);\n\n\n//# sourceURL=webpack:///./index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _demo_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./demo.less */ \"./demo.less\");\n/* harmony import */ var _demo_less__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo_less__WEBPACK_IMPORTED_MODULE_0__);\n\n\n//# sourceURL=webpack:///./index.js?");
 
 /***/ })
 

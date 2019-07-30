@@ -11,15 +11,29 @@ module.exports = {
     module: {
         rules: [
             {
-                test:/\.css$/,
-                use:[
+                test:/\.less$/,
+                use: [
                     {
-                        loader: MiniCssExtractPlugin.loader,
+                        loader: MiniCssExtractPlugin.loader
                     },
                     {
-                        loader: 'css-loader'
+                        loader:'css-loader'
+                    },
+                    {
+                        loader:'postcss-loader',
+                        options:{
+                            ident:'postcss',
+                            plugins:[
+                                require('postcss-cssnext')(),
+                                // require('autoprefixer')(),
+                                require('cssnano')()
+                            ]
+                        }
+                    },
+                    {
+                        loader:'less-loader'
                     }
-                ]
+                ],
             }
         ]
     },
