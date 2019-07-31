@@ -60,7 +60,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(),
+        // new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             title: 'img-process',
             filename: 'index.html',
@@ -72,5 +72,10 @@ module.exports = {
                 collapseWhitespace: true  
             }
         })
-    ]
+    ],
+    "mode": "development",
+    devServer: {
+        port: '9091',
+        contentBase:'dist'
+    }
 }
