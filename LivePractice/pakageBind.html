@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>封装bind源码</title>
+</head>
+
+<body>
+
+
+    <script>
+        /* 
+        var o = {};
+        function A(x,y){        }
+        var z = 'c',
+        var B = A.bind(o, x, y);
+        B(z)
+        1. 函数A调用bind方法时，需要传递的参数o，x，y，z
+        2. 返回新的函数B
+        3. 函数B在执行时，具体的功能实际上还是用A，只是this指向了o | window
+        4. 函数B在执行的时候，传递的参数回拼接到x，y，z后面，一并传给A执行
+        5. new B() 构造函数依旧是A，且o不会起到任何作用
+        */
+
+        Function.prototype.myBind = function (target) {
+            // target 改变返回函数执行的this指向
+            let _this = this;
+            let temp = function () {};
+            let f = function () {
+                let _arg = [].slice.call(arguments, 0)
+                // this new f()
+                return _this.apply(this instanceof temp ? this : (targert || window), args.concat(_arg));
+            }
+            temp.prototype = _this.prototype;
+            f.prototype = new temp();
+            return f;
+        }
+
+        
+    </script>
+</body>
+
+</html>
