@@ -12,11 +12,11 @@ function addEvent(elem, type, handle) {
     }
 }
 
- // 阻止默认事件的函数
- function cancelHandler(event) {
-    if(event.preventDefault) {
+// 阻止默认事件的函数
+function cancelHandler(event) {
+    if (event.preventDefault) {
         event.preventDefault();
-    }else {
+    } else {
         event.returnValue = false;
     }
 }
@@ -25,11 +25,11 @@ function addEvent(elem, type, handle) {
 function drag(elem) {
     var disX,
         disY;
-    addEvent(elem, 'mousedown', function(e) {
+    addEvent(elem, 'mousedown', function (e) {
         var event = e || window.event;
         disX = event.clientX - parseInt(getStyle(elem, 'left'));
         disY = event.clientY - parseInt(getStyle(elem, 'top'));
-        addEvent (document, 'mousemove', mouseMove);
+        addEvent(document, 'mousemove', mouseMove);
         addEvent(document, 'mouseup', mouseUp);
         stopBubble(event);
         cancelHandler(event);
@@ -80,7 +80,7 @@ function startMove(dom, attr, target) {
         } else {
             if (attr == 'opacity') {
                 dom.style.opacity = (iCur + iSpeed) / 100;
-            }else {
+            } else {
                 dom.style[attr] = iCur + iSpeed + 'px';
             }
         }
@@ -97,13 +97,13 @@ function getStyle(dom, attr) {
 }
 
 //深度克隆
-function deepClone (target, origin) {
+function deepClone(target, origin) {
     var toStr = Object.prototype.toString,
         arrObj = '[Object Array]',
         target = target || {};
-    for(var prop in origin){
-        if(origin.hasOwnProperty(prop)){
-            if(typeof(origin[prop]) == 'object'){
+    for (var prop in origin) {
+        if (origin.hasOwnProperty(prop)) {
+            if (typeof (origin[prop]) == 'object') {
                 target[prop] = toStr.call(origin[prop]) == arrObj ? [] : {};
                 deepClone(target[prop], origin[prop]);
             }
@@ -114,10 +114,11 @@ function deepClone (target, origin) {
 }
 
 // 防抖
-function debounce (handler, delay) {
+function debounce(handler, delay) {
     var timer;
     return function () {
-        var _self = this, _arg = arguments;
+        var _self = this,
+            _arg = arguments;
         clearTimeout(timer);
         timer = setInterval(() => {
             handler.apply(_self, _arg);
