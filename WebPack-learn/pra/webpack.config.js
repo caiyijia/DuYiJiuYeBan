@@ -61,7 +61,7 @@ module.exports = {
         ]
     },
     plugins: [
-        // new CleanWebpackPlugin(),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             title: 'img-process',
             filename: 'index.html',
@@ -75,7 +75,7 @@ module.exports = {
         }),
         new Webpack.HotModuleReplacementPlugin()
     ],
-    "mode": "development",
+    // mode: "development",
     devServer: {
         port: '9091',
         contentBase:'dist',
