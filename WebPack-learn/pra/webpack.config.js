@@ -3,6 +3,7 @@ const {
     CleanWebpackPlugin
 } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -71,11 +72,13 @@ module.exports = {
                 removeComments: true,
                 collapseWhitespace: true  
             }
-        })
+        }),
+        new Webpack.HotModuleReplacementPlugin()
     ],
     "mode": "development",
     devServer: {
         port: '9091',
-        contentBase:'dist'
+        contentBase:'dist',
+        hot: true
     }
 }

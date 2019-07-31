@@ -1,7 +1,9 @@
 import './index.css';
 import $ from 'jquery';
 // var json = require('./data.json');
-// console.log(json, 'correct');
+console.log('correct');
+
+
 
 $.ajax({
     url:'http://localhost:9091/data.json',
@@ -12,3 +14,7 @@ $.ajax({
         console.log('error')
     }
 }) 
+
+if(module.hot) {
+    module.hot.accept();
+}
