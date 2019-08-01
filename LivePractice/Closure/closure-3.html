@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包的形式</title>
+</head>
+<body>
+    
+    <script>
+        // var a = 20;
+        // function wrapFn() {
+        //     var b = 10;
+        //     function interFn() {
+        //         console.log(b);
+        //         debugger
+        //     }
+        //     return interFn;
+        // }
+
+        // var fn = wrapFn();
+        // fn();
+
+        // function wrapFn() {
+        //     var a = 10;
+        //     return function () {
+        //         var b = 20;
+        //         return function() {
+        //             console.log(b);
+        //             console.log(a);
+        //             debugger
+        //         }
+        //     }
+        // }
+
+        // var son = wrapFn()()();
+
+        function wrapFn () {
+            var a = 10 ;
+            function innerFn1() {
+                return a;
+                debugger
+            }
+            function innerFn2() {
+                debugger
+                // return undefined;
+                console.log(innerFn1())
+                debugger
+                
+            }
+            // innerFn2();
+            debugger
+            return innerFn2;
+        }
+
+
+        var result = wrapFn();
+        debugger
+        result();
+
+
+        
+        </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包底层原理</title>
+</head>
+
+<body>
+
+    <script>
+        /*  
+            1、变量的生命周期 
+                - 局部变量的生命周期在函数执行完成后就到头了
+                - 全局变量的生命周期在页面关闭后就到头了
+            2、垃圾回收机制 
+                - 标记清楚
+                - 引用计数
+                ！ 如果这个数据有引用的关系，就不会被回收
+            3、执行上下文 EC
+                - 全局环境
+                - 函数环境
+                - eval
+            4、执行上下文栈 ECS， 函数调用栈 （call stack)
+                - 变量对象
+
+            - 普通函数，定义函数的时候是嵌套的，调用的时候也是嵌套的
+            - 闭包函数，定义函数的时候是嵌套的，调用的时候是独立的
+            
+            创建完EC后需要走两个阶段
+                - 创建阶段
+                - 执行阶段
+        */            
+
+        function father () {
+            var n = 0
+            function son () {
+                ++n;
+                debugger
+            };
+            debugger
+            return son;
+        }
+
+        var result = father ();
+        debugger
+        result();
+        debugger
+        result()
+
+
+
+
+    </script>
+</body>
+
+</html>
