@@ -1,11 +1,12 @@
 {
   "name": "babel",
   "version": "1.0.0",
-  "description": "",
+  "description": "ES6",
   "main": "index.js",
   "dependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "init": "^0.1.2"
   },
