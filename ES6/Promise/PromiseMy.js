@@ -116,3 +116,11 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
 
     return nextPromise;
 }
+
+MyPromise.prototype.race = function(promiseArr) {
+    return new MyPromise(function(resolve, reject){
+        promiseArr.forEach(function(promise, index) {
+            promise.then(resolve, reject);
+        })
+    })
+}
