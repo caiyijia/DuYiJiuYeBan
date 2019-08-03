@@ -11,7 +11,11 @@
     <script>
         let oP = new MyPromise((res, rej)=> {
             // rej(0);
-            throw new TypeError('aaa')
+            // throw new TypeError('aaa')
+            // 异步操作
+            setTimeout(() => {
+                rej(0);
+            },500)
         })
 
         oP.then((val)=> {
