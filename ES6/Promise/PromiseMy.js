@@ -132,6 +132,9 @@ MyPromise.race = function(promiseArr) {
 /* 测试原生Promise.all输出的数组是按照原数组的顺序，而不是产生结果的顺序，所以不能用push */
 MyPromise.all = function(promiseArr) {
     return new MyPromise(function(resolve, reject){
+        if (!isArray(promises)) {
+            return reject(new TypeError('arguments should be an array'));
+        }
         var resolvedArr = [];
         var counter = 0;
         promiseArr.forEach(function(promise, index, arr) {
