@@ -14,14 +14,20 @@
             // throw new TypeError('aaa')
             // 异步操作
             setTimeout(() => {
-                rej(0);
-            },500)
+                res(0);
+            },1500)
         })
 
         oP.then((val)=> {
             console.log(val,'ok')
+            return 1;
         }, (reason)=>{
             console.log(reason, 'no')
+            return 2;
+        }).then((val) => {
+            console.log(val, 'ok2');
+        }, (reason) => {
+            console.log(reason, 'no2')
         })
     </script>
 </body>
