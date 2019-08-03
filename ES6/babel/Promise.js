@@ -4,7 +4,7 @@ let oStudent = {};
 
 function readFile(path) {
     if (!path || path == 'undefined') return;
-    console.log(path)
+    // console.log(path)
     return new Promise((res, rej) => {
         fs.readFile(path, 'utf-8', (err, data) => {
             if (data) {
@@ -15,7 +15,10 @@ function readFile(path) {
 }
 
 // promise对象
-Promise.all([readFile('./data/number.txt'), readFile('./data/name.txt'), readFile('./data/score.txt')]).then((val) => {
+// Promise.all([readFile('./data/number.txt'), readFile('./data/name.txt'), readFile('./data/score.txt')]).then((val) => {
+//     console.log(val)
+// })
+Promise.race([readFile('./data/number.txt'), readFile('./data/name.txt'), readFile('./data/score.txt')]).then((val) => {
     console.log(val)
 })
 // readFile('./data/number.txt').then((data) => {
