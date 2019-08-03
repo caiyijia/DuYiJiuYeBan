@@ -3,9 +3,11 @@ function MyPromise(executor) {
     self.status = 'pending';
     self.resolveValue = null;
     self.rejectReason = null;
+    // 将需要异步执行的函数存入数组
     self.ResolveCallBackList = [];
     self.RejectCallBackList = [];
 
+    // 实现状态变更
     function resolve(value) {
         if (self.status == 'pending') {
             self.status = 'Fulfilled';
@@ -35,26 +37,67 @@ function MyPromise(executor) {
 }
 
 MyPromise.prototype.then = function (onFulfilled, onRejected) {
+    // 处理空Then
+    if(!onFulfilled) {
+        onFulfilled = function(v) {
+            return v;
+        }
+    }
+    if(!onRejected) {
+        onRejected = function(r) {
+            throw new TypeError(r);
+            // console.log(r)
+        }
+    }
+    
     var self = this;
+    // 用nextPromise实现链式调用
     var nextPromise = new MyPromise(function (res, rej) {
         if (self.status == 'Fulfilled') {
-            var nextResolveValue = onFulfilled(self.resolveValue);
-            res(nextResolveValue)
+            // then
+            setTimeout(function () {
+                try {
+                    var nextResolveValue = onFulfilled(self.resolveValue);
+                    res(nextResolveValue);
+                } catch (e) {
+                    rej(e);
+                }
+            }, 0);
         }
+
         if (self.status === 'Rejected') {
-            var nextRejectValue = onRejected(self.rejectReason);
-            rej(nextRejectValue);
+            setTimeout(function () {
+                try {
+                    var nextRejectValue = onRejected(self.rejectReason);
+                    rej(nextRejectValue);
+                } catch (error) {
+                    rej(error)
+                }
+
+            }, 0)
         }
 
         if (self.status === 'pending') {
             self.ResolveCallBackList.push(function () {
-                var nextResolveValue = onFulfilled(self.resolveValue);
-                res(nextResolveValue)
+                setTimeout(function () {
+                    try {
+                        var nextResolveValue = onFulfilled(self.resolveValue);
+                        res(nextResolveValue)
+                    } catch (e) {
+                        rej(e)
+                    }
+                }, 0)
             });
             self.RejectCallBackList.push(function () {
-                var nextRejectValue = onRejected(self.rejectReason);
-                rej(nextRejectValue);
-            })
+                setTimeout(function () {
+                    try {
+                        var nextRejectValue = onRejected(self.rejectReason);
+                        rej(nextRejectValue);
+                    } catch (e) {
+                        rej(e)
+                    }
+                }, 0)
+            });
         }
     })
 

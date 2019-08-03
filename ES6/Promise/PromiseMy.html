@@ -1,34 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Promise原理</title>
 </head>
+
 <body>
     <script src="./PromiseMy.js"></script>
     <script>
-        let oP = new MyPromise((res, rej)=> {
+        let oP = new MyPromise((res, rej) => {
             // rej(0);
             // throw new TypeError('aaa')
             // 异步操作
-            setTimeout(() => {
-                res(0);
-            },1500)
+            // setTimeout(() => {
+            //     res(0);
+            // },1500)
+            // console.log(0);
+            res(1)
         })
 
-        oP.then((val)=> {
-            console.log(val,'ok')
-            return 1;
-        }, (reason)=>{
-            console.log(reason, 'no')
-            return 2;
-        }).then((val) => {
-            console.log(val, 'ok2');
+        oP.then((val) => {
+            console.log(val, 'ok');
+            throw new TypeError('test')
+            // return 1;
         }, (reason) => {
-            console.log(reason, 'no2')
+            console.log(reason, 'no')
+        }).then(/*(v) => { 
+            return v; // 略过空的then相当于传进去值又返回
+        }, (r) => {
+            throw new TypeError(r)
+        }*/).then((v) => {
+            console.log(v, 'after empty then')
+        }, (reason) => {
+            console.log(reason, 'after empty then')
         })
+        // console.log(2)
+
+        // oP.then((val)=> {
+        //     console.log(val,'ok')
+        //     return 1;
+        // }, (reason)=>{
+        //     console.log(reason, 'no')
+        //     return 2;
+        // }).then((val) => {
+        //     console.log(val, 'ok2');
+        // }, (reason) => {
+        //     console.log(reason, 'no2')
+        // })
     </script>
 </body>
+
 </html>
