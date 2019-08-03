@@ -1,1 +1,1 @@
-CYj
+./data/score.txt

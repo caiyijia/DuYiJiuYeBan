@@ -1,20 +1,19 @@
-const oBtn = document.getElementById('btn');
-const oInp = document.getElementById('inp');
-let arr = [];
-oBtn.onclick = function(){
-    arr.push(oInp.value);
-    newShow(arr);
+let fs = require('fs');
+
+function readFile(path) {
+    return new Promise((res, rej) => {
+        fs.readFile(path, 'utf-8', (err,data) => {
+            if(data) {
+                res(data)
+            }
+        })
+    })
 }
 
-function show(data) {
-    console.log(data);
-}
-
-function after(num, func) {
-    return function() {
-        if(--num == 0) {
-            func.apply(window, arguments);
-        }
-    }
-}
-let newShow = after(5, show);
+readFile('./data/number.txt').then((data) => {
+    return readFile(data);
+}).then((data) => {
+    return readFile(data);
+}).then((data) => {
+    console.log(data)
+})
