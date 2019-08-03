@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise原理</title>
+</head>
+<body>
+    <script src="./PromiseMy.js"></script>
+    <script>
+        let oP = new MyPromise((res, rej)=> {
+            // rej(0);
+            throw new TypeError('aaa')
+        })
+
+        oP.then((val)=> {
+            console.log(val,'ok')
+        }, (reason)=>{
+            console.log(reason, 'no')
+        })
+    </script>
+</body>
+</html>
