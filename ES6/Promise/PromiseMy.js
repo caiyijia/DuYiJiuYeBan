@@ -129,6 +129,7 @@ MyPromise.race = function(promiseArr) {
 
 // 都成功时，返回一个包含所有结果的数组
 // 或者，返回第一个失败的值
+/* 测试原生Promise.all输出的数组是按照原数组的顺序，而不是产生结果的顺序，所以不能用push */
 MyPromise.all = function(promiseArr) {
     return new MyPromise(function(resolve, reject){
         var resolvedArr = [];
@@ -137,8 +138,8 @@ MyPromise.all = function(promiseArr) {
             var len = arr.length;
             promise.then(function(val){
                 counter = counter + 1;
-                resolvedArr.push(val);
-                // console.log(resolvedArr)
+                resolvedArr[index] = val;
+                console.log(resolvedArr)
                 // console.log(counter)
                 if (counter == len){
                     // console.log(resolvedArr)
