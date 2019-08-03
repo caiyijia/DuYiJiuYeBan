@@ -117,10 +117,37 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
     return nextPromise;
 }
 
-MyPromise.prototype.race = function(promiseArr) {
+MyPromise.race = function(promiseArr) {
     return new MyPromise(function(resolve, reject){
         promiseArr.forEach(function(promise, index) {
             promise.then(resolve, reject);
+            console.log(promise)
+            
         })
     })
+}
+
+// 都成功时，返回一个包含所有结果的数组
+// 或者，返回第一个失败的值
+MyPromise.all = function(promiseArr) {
+    return new MyPromise(function(resolve, reject){
+        var resolvedArr = [];
+        var counter = 0;
+        promiseArr.forEach(function(promise, index, arr) {
+            var len = arr.length;
+            promise.then(function(val){
+                counter = counter + 1;
+                resolvedArr.push(val);
+                // console.log(resolvedArr)
+                // console.log(counter)
+                if (counter == len){
+                    // console.log(resolvedArr)
+                    return resolve(resolvedArr)
+                }
+            },function(reason){
+                return reject(reason);
+            })
+        })
+    })
+
 }

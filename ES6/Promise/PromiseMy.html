@@ -11,7 +11,22 @@
 <body>
     <script src="./PromiseMy.js"></script>
     <script>
-        let oP = new Promise((res, rej) => {
+        function test (x, delay = 0) {
+            return new MyPromise((res, rej) => {
+                setTimeout(() => {
+                    Math.random() < 1 ? res(x) : rej(x);
+                }, delay);
+            })
+        }
+
+        let oP = MyPromise.all([test('a', 300), test('b', 100), test('c', 200)])
+        oP.then((val)=>{
+            console.log(val)
+        },(reason)=>{
+            console.log(reason)
+        })
+
+        // let oP = new Promise((res, rej) => {
             // rej(0);
             // throw new TypeError('aaa')
             // 异步操作
@@ -19,25 +34,25 @@
             //     res(0);
             // },1500)
             // console.log(0);
-            res(1)
-        })
+            // res(1)
+        // })
 
-        oP.then((val) => {
-            console.log(val, 'ok');
-            return new MyPromise((res, rej) => {
-                res(0);
-            })
-        }, (reason) => {
-            console.log(reason, 'no')
-        }).then(/*(v) => { 
-            return v; // 略过空的then相当于传进去值又返回
-        }, (r) => {
-            throw new TypeError(r)
-        }*/).then((v) => {
-            console.log(v, 'after empty then v')
-        }, (reason) => {
-            console.log(reason, 'after empty then r')
-        })
+        // oP.then((val) => {
+        //     console.log(val, 'ok');
+        //     return new MyPromise((res, rej) => {
+        //         res(0);
+        //     })
+        // }, (reason) => {
+        //     console.log(reason, 'no')
+        // }).then(/*(v) => { 
+        //     return v; // 略过空的then相当于传进去值又返回
+        // }, (r) => {
+        //     throw new TypeError(r)
+        // }*/).then((v) => {
+        //     console.log(v, 'after empty then v')
+        // }, (reason) => {
+        //     console.log(reason, 'after empty then r')
+        // })
         // console.log(2)
 
         // oP.then((val)=> {
