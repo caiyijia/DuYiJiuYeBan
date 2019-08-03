@@ -36,6 +36,18 @@ function MyPromise(executor) {
     }
 }
 
+function SolveReturnPromise(nextPromise, returnValue, res, rej){
+    if(returnValue instanceof MyPromise) {
+        returnValue.then(function() {
+            res(val)
+        }, function(){
+            rej(reason)
+        })
+    }else {
+        res(returnValue)
+    }
+}
+
 MyPromise.prototype.then = function (onFulfilled, onRejected) {
     // 处理空Then
     if(!onFulfilled) {
@@ -58,7 +70,8 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
             setTimeout(function () {
                 try {
                     var nextResolveValue = onFulfilled(self.resolveValue);
-                    res(nextResolveValue);
+                    // res(nextResolveValue);
+                    SolveReturnPromise(nextPromise, nextResolveValue, res, rej)
                 } catch (e) {
                     rej(e);
                 }
@@ -69,7 +82,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
             setTimeout(function () {
                 try {
                     var nextRejectValue = onRejected(self.rejectReason);
-                    rej(nextRejectValue);
+                    SolveReturnPromise(nextRejectValue, nextResolveValue, res, rej)                    
                 } catch (error) {
                     rej(error)
                 }
@@ -82,7 +95,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
                 setTimeout(function () {
                     try {
                         var nextResolveValue = onFulfilled(self.resolveValue);
-                        res(nextResolveValue)
+                        SolveReturnPromise(nextPromise, nextResolveValue, res, rej);                        
                     } catch (e) {
                         rej(e)
                     }
@@ -92,7 +105,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
                 setTimeout(function () {
                     try {
                         var nextRejectValue = onRejected(self.rejectReason);
-                        rej(nextRejectValue);
+                        SolveReturnPromise(nextRejectValue, nextResolveValue, res, rej);
                     } catch (e) {
                         rej(e)
                     }
