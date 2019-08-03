@@ -1,5 +1,8 @@
 # DuYiJiuYeBan
 JavaScript学习记录
+
+- [ES5模拟实现Promise](./ES6/Promise)
+- [ES5模拟实现Map](./ES6/map)
 - [jsModule](./WebPack-learn/jsMoudle)
 - [fileReader](./H5/input-fileReader)
 - [刮刮乐(Canvas)](./H5/canvas-2.html)
