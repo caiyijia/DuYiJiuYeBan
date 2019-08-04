@@ -53,25 +53,46 @@ function* read() {
     return val3
 }
 
-let oG = read();
-let {
-    value,
-    done
-} = oG.next();
-value.then((val) => {
-    let {
-        value,
-        done
-    } = oG.next(val);
-    value.then((val) => {
-        let {
-            value,
-            done
-        } = oG.next(val);
-        value.then((val) => {
-            console.log(val)
-        })
-    })
-})
+// let oG = read();
+// let {
+//     value,
+//     done
+// } = oG.next();
+// value.then((val) => {
+//     let {
+//         value,
+//         done
+//     } = oG.next(val);
+//     value.then((val) => {
+//         let {
+//             value,
+//             done
+//         } = oG.next(val);
+//         value.then((val) => {
+//             console.log(val)
+//         })
+//     })
+// })
 
-console.log()
+// 递归优化
+function Co(oIt) {
+    return new Promise((res, rej) => {
+        let next = (data) => {
+            let {value, done} = oIt.next(data);
+            if (done) {
+                res(value);
+            }else {
+                return value.then((val) => {
+                    next(val)
+                }, rej)
+            }
+        }
+        next();
+    })
+}
+
+Co(read()).then(val => {
+    console.log(val)
+}, rs => {
+
+})
