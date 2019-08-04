@@ -1,1 +1,1 @@
-./data/name.txt
+../babel/data/name.txt

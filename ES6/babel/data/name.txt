@@ -1,1 +1,1 @@
-./data/score.txt
+../babel/data/score.txt
