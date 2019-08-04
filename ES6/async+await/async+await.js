@@ -70,3 +70,6 @@ promisifyAll(fs)
 // fs.readFile => readFileAsync; fs.writeFile => writeFileAsync
 
 fs.readFileAsync('../babel/data/number.txt', 'utf-8').then(val=> console.log(99, val), rs => {})
+
+// let bluebird = require('bluebird');
+// bluebird.promisify(fs.readFile)
