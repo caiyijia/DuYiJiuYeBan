@@ -75,24 +75,26 @@ function* read() {
 // })
 
 // 递归优化
-function Co(oIt) {
-    return new Promise((res, rej) => {
-        let next = (data) => {
-            let {value, done} = oIt.next(data);
-            if (done) {
-                res(value);
-            }else {
-                return value.then((val) => {
-                    next(val)
-                }, rej)
-            }
-        }
-        next();
-    })
-}
+// function Co(oIt) {
+//     return new Promise((res, rej) => {
+//         let next = (data) => {
+//             let {value, done} = oIt.next(data);
+//             if (done) {
+//                 res(value);
+//             }else {
+//                 return value.then((val) => {
+//                     next(val)
+//                 }, rej)
+//             }
+//         }
+//         next();
+//     })
+// }
 
-Co(read()).then(val => {
-    console.log(val)
-}, rs => {
+// Co(read()).then(val => {
+//     console.log(val)
+// }, rs => {
 
-})
+// })
+let co = require('co');
+co(read()).then(val=> console.log(val),rej => console.log(rej))
