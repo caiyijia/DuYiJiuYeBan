@@ -101,17 +101,52 @@ function readFile(path) {
 // }, rs => { console.log(rs)
 // })
 
-async function read(url) {
-    try {
-        let val1 = await readFile(url);
-        let val2 = await readFile(val1);
-        let val3 = await readFile(val2);
-        return val3
-    } catch (e) {
-        console.log(111, e)
-    }
+// async function read(url) {
+//     try {
+//         let val1 = await readFile(url);
+//         let val2 = await readFile(val1);
+//         let val3 = await readFile(val2);
+//         return val3
+//     } catch (e) {
+//         console.log(111, e)
+//     }
 
+// }
+// read('../babel/data/number.txt').then(val => console.log(val), rs => {
+//     console.log(rs)
+// })
+
+// Promise.all([readFile('../babel/data/number.txt'), readFile('../babel/data/number.txt'),readFile('../babel/data/number.txt')]).then(val => console.log(val), rs => console.log(rs))
+
+async function read1() {
+    let val1 = null;
+    try {
+        val1 = await readFile('../babel/data/number.txt');
+        console.log(val1)
+    }catch(e) {
+        console.log(e, 1);
+    }
 }
-read('../babel/data/number1.txt').then(val => console.log(val), rs => {
-    console.log(rs)
-})
+
+async function read2() {
+    let val2 = null;
+    try {
+        val2 = await readFile('../babel/data/number.txt');
+        console.log(val2)
+    }catch(e) {
+        console.log(e, 2);
+    }
+}
+async function read3() {
+    let val3 = null;
+    try {
+        val3 = await readFile('../babel/data/number.txt');
+        console.log(val3)
+    }catch(e) {
+        console.log(e, 3);
+    }
+}
+function readAll(...args) {
+    args.forEach(ele=> ele())
+}
+readAll(read1, read2, read3)
