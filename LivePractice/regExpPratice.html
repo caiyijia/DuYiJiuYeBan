@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>正则表达式练习</title>
+</head>
+
+<body>
+
+    <script>
+        // function bubbleSort(arr){
+        //     // var result = [];
+        //     const len = arr.length;
+        //     for(let i=0; i < len; i++){
+        //         for(let j = i + 1; j < len; j++){
+        //             if(arr[i] > arr[j]){
+        //                 let temp = arr[j];
+        //                 arr[j] = arr[i];
+        //                 arr[i] = temp;
+        //             }
+        //         }
+        //     }
+        //     return arr
+        // }    
+
+        // var arr = [1, 20, 30, 11, 31, 99, 22]
+
+        // console.log(bubbleSort(arr))
+
+        var str = 'lkdh打打蜡打开手机打；lkjfskjttthflafsjfpioaanettattaionflbnttaaif';
+        // document.write(str + '<br>');
+        // document.write(str.split('') + '<br>');
+        // document.write(str.split('').sort() + '<br>');
+        // document.write(str.split('').sort().join('') + '<br>');
+
+        /*
+        $$	插入一个 "$"。
+        $&	插入匹配的子串。
+        $`	插入当前匹配的子串左边的内容。
+        $'	插入当前匹配的子串右边的内容。
+        $n	假如第一个参数是 RegExp对象，并且 n 是个小于100的非负整数，那么插入第 n 个括号匹配的字     符串。提示：索引是从1开始 
+        */
+
+        function maxTimesStr(str) {
+            var newStr = str.split('').sort().join('');
+            var regExp = /(\w)\1+/g;
+            var result = '';
+            var times = 0;
+            newStr.replace(regExp, function ($0, $1) {
+                
+                if (times < $0.length){
+                    times = $0.length;
+                    result = $1
+                }
+                // console.log(result, times)
+            })
+            // console.log(newStr)
+            return result + ' has shown ' + times + ' times'
+        }
+        console.log(maxTimesStr(str))
+    </script>
+</body>
+
+</html>
