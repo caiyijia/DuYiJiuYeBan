@@ -52,7 +52,7 @@
 
     </ol>
     <ol start='3'>
-        <li><span>时间代理</span></li>
+        <li><span>事件代理</span></li>
 
     </ol>
     <ol start='4'>
@@ -67,6 +67,25 @@
     <div id="box" style="height: 100px; width: 100px; background-color: brown;"></div>
 
     <script>
+        // 事件代理
+        var lis = document.querySelectorAll('li');
+        var len = lis.length;
+        var ul = document.querySelector('ul');
+
+        /* for(var i=0;i<len;i++){
+            lis[i].onclick=function(){
+
+            }
+        } */
+
+        ul.onclick = function (ev) {
+            //console.log(ev.target.tagName);
+
+            if (ev.target.tagName.toLowerCase() == 'li') {
+                console.log(ev.target.innerHTML)
+            }
+        }
+
         var div = document.querySelectorAll('div')[0];
 
         // div.innerHTML += "a";
